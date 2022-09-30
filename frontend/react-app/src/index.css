@@ -1,0 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+
+
+.toggle-button{
+  @apply flex h-[48px] items-center md:hidden
+}
+.input{
+  @apply border w-full rounded-md rounded-tr-none rounded-br-none pl-4 py-2 outline-none focus:border-2
+}
+
+.container{
+  @apply max-w-screen-2xl mx-auto px-4 md:px-6
+}
+.row{
+  @apply flex flex-wrap
+}
+.cover-image{
+  @apply h-full w-full object-contain
+}
+.full-image{
+  @apply h-full w-full object-cover
+}
+.dark-cover{
+  @apply before:inset-0 before:w-full before:h-full before:absolute
+}
+.style-heading{
+  @apply text-[#5858ec]  text-[16px] mb-5 font-semibold underline decoration-wavy decoration-[1px] underline-offset-4 decoration-[#5858ec]
+}
+.header-design{
+  @apply before:bg-[#5858ec] before:absolute before:w-8 before:h-8 before:top-[6px] before:left-16 before:rotate-45 before:-z-50
+}
+
+@tailwind utilities;
