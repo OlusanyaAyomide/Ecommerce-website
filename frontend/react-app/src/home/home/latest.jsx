@@ -2,26 +2,18 @@ import React,{useEffect,useState} from 'react'
 import { MinHeader } from '../components'
 import { LatestDemo } from '../../constants'
 import { ProductList} from '../components'
+import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 export default function Latests() {
 
-  const [Latest,setLatest] = useState(LatestDemo)
+  const Latest= useSelector(state=>state.product.latest)
 
   const LatestList = Latest.map((item,key)=>{
     return(
-      <ProductList name = {item.name} reviews = {item.reviews} url = {item.url} totalR = {item.totalR} price ={item.price} store ={item.store} key ={key}/>
+      <ProductList name = {item.name} reviews = {item.reviews} url = {item.url} totalR = {item.totalR} price ={item.price} store ={item.store} key ={key} items={item}/>
     )
   })
-  // useEffect(()=>{
-  //   async function ApiCall(){
-  //     const res = await fetch("http://127.0.0.1:8000")
-  //     const data = await res.json()
-  //     console.log(data)
-  //     setLatest(data)
-  //   }
-  //   ApiCall()
-  // },[])
-
 
   return (
     <section className='container bg-gradient-to-b from-slate-300 to-[#5858ec]/10'>

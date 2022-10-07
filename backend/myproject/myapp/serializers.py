@@ -2,9 +2,10 @@ from rest_framework import serializers
 from .models import Product,Review,Category
 
 class Reviewserializer(serializers.ModelSerializer):
+    customer = serializers.StringRelatedField(read_only = True)
     class Meta:
         model = Review
-        fields ="__all__"
+        exclude = ["product"]
 
 class Productserializer(serializers.ModelSerializer):
     url = serializers.SerializerMethodField()

@@ -7,6 +7,12 @@ export const NavbarAn={
         transition:{
             duration:0.4
         }
+    },
+    "exit":{
+        x:0,
+        transition:{
+            duration:0.4
+        }
     }
 }
 export  const Featured={

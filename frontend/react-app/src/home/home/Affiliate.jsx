@@ -1,14 +1,14 @@
 import React,{useState} from 'react'
 import { AffiliateDemo,TopListtDemo} from '../../constants'
 import { ProductList,TopDealsCom,AffiliateHeader} from '../components'
+import { useSelector } from 'react-redux'
 
 
 
 export default function Affiliate() {
-    const [Stores,setStores] = useState(AffiliateDemo)
-
+    // const [Stores,setStores] = useState(AffiliateDemo)
+    const Stores=useSelector((state=>state.product.affiliate))
     const StoreList = Stores.map((items,key)=>{
-        console.log(key)
         return(
             <div key = {key}>
                 {key == 2 && <div>
@@ -31,7 +31,7 @@ export default function Affiliate() {
                 <div className='row bg-white container'>
                 {items.Products.map((item,key2)=>{
                     return(
-                          <ProductList name = {item.name} reviews = {item.reviews} url = {item.url} totalR = {item.totalR} price ={item.price} store ={item.store} key ={key2}/>
+                          <ProductList name = {item.name} reviews = {item.reviews} url = {item.url} totalR = {item.totalR} price ={item.price} store ={item.store} key ={key2} items={item}/>
                     )
                 })}
                 </div>

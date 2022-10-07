@@ -403,40 +403,53 @@ export const TopListtDemo=[
         "store":24,
         "price":"2,500"
      },
-     {
-        "id":7,
-        "url":lg2,
-        "name":":Cyan Fancy Trouser",
-        "reviews":4.2,
-        "totalR":15,
-        "store":24,
-        "price":"105,500"
-     },
-     {
-        "id":8,
-        "url":lg3,
-        "name":"HD spectro Max TV",
-        "reviews":4.6,
-        "totalR":15,
-        "store":24,
-        "price":"5,200"
-     },
-     {
-        "id":9,
-        "url":samsung2,
-        "name":"Galaxy TAB max spec",
-        "reviews":2.5,
-        "totalR":22,
-        "store":19,
-        "price":"205,500"
-     },
-     {
-        "id":10,
-        "url":babyjacket,
-        "name":"Leatherr Jacket",
-        "reviews":4.0,
-        "totalR":15,
-        "store":23,
-        "price":"5,500"
-     },
+   //   {
+   //      "id":7,
+   //      "url":lg2,
+   //      "name":":Cyan Fancy Trouser",
+   //      "reviews":4.2,
+   //      "totalR":15,
+   //      "store":24,
+   //      "price":"105,500"
+   //   },
+   //   {
+   //      "id":8,
+   //      "url":lg3,
+   //      "name":"HD spectro Max TV",
+   //      "reviews":4.6,
+   //      "totalR":15,
+   //      "store":24,
+   //      "price":"5,200"
+   //   },
+   //   {
+   //      "id":9,
+   //      "url":samsung2,
+   //      "name":"Galaxy TAB max spec",
+   //      "reviews":2.5,
+   //      "totalR":22,
+   //      "store":19,
+   //      "price":"205,500"
+   //   },
+   //   {
+   //      "id":10,
+   //      "url":babyjacket,
+   //      "name":"Leatherr Jacket",
+   //      "reviews":4.0,
+   //      "totalR":15,
+   //      "store":23,
+   //      "price":"5,500"
+   //   },
 ]
+
+export const ProductDetailDemo={
+   detail:
+      {
+      "id":9,
+      "url":samsung2,
+      "name":"Galaxy TAB max spec",
+      "reviews":2.5,
+      "totalR":22,
+      "store":19,
+      "price":"205,500"
+   }
+}
