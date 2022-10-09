@@ -7,6 +7,7 @@ const categoryslice = createSlice({
         allcategories:[],
         trending:[],
         allstores:[],
+        active:false
     },
     reducers:{
         updatename(state,action){
@@ -27,6 +28,9 @@ const categoryslice = createSlice({
         },
         updateallstores(state,action){
             state.allstores = action.payload
+        },
+        setasactive(state){
+            state.active = true
         }
     }
 })

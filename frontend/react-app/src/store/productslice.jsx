@@ -5,7 +5,7 @@ const ProductSlice = createSlice({
     initialState:{latest:[],featured:[],featureloaded:false,affiliate:[],search:{
         userinput:"",
         autopredict:[]
-    },allcategory:[]},
+    },allcategory:[],loaded:false},
     reducers:{
         updateLatest(state,action){
             state.latest = action.payload
@@ -25,10 +25,8 @@ const ProductSlice = createSlice({
         },
         updateallcategory(state,action){
             state.allcategory = action.payload
-        }
-
-
-        
+            state.loaded= true
+        },        
     }
 })
 

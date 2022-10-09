@@ -40,6 +40,61 @@ export function MinHeader2(props){
   )
 }
 
+
+const Star=(prop)=>{
+  if(prop.rating===5){
+    return(
+      <>
+        <i className='fa fa-star'></i>
+        <i className='fa fa-star'></i>
+        <i className='fa fa-star'></i>
+        <i className='fa fa-star'></i>
+        <i className='fa fa-star'></i>
+      </>
+    )
+}
+  else if(prop.rating === 4){
+    return(
+      <>
+        <i className='fa fa-star'></i>
+        <i className='fa fa-star'></i>
+        <i className='fa fa-star'></i>
+        <i className='fa fa-star'></i></>
+    )
+  }
+  else if(prop.rating === 3){
+    return(
+      <>
+        <i className='fa fa-star'></i>
+        <i className='fa fa-star'></i>
+        <i className='fa fa-star'></i>
+      </>
+    )
+  }
+  else if(prop.rating ===2 ){
+    return(
+      <>
+        <i className='fa fa-star'></i>
+        <i className='fa fa-star'></i>
+      </>
+    )
+  }
+  else{
+    return(
+      <i className='fa fa-star'></i>
+    )
+  }
+  
+}
+
+export const DetailStar=(prop)=>{
+    return(
+      <span className='text-yellow-500 text-base'>
+        <Star rating={prop.rating} />
+      </span>
+    )
+}
+
 export function Ratings(props){
     if(props.reviews >= 4.6){
       return(
@@ -112,6 +167,20 @@ export function Ratings(props){
 }
   else{return}
 }
+export function convert(price,discount){
+  let prize = Number(price.replace(",",""))
+  let discounted_price = prize-(discount/100*prize)
+  if (discounted_price>10000){
+    const value=parseFloat(discounted_price.toPrecision(3))
+    const newprice = value.toLocaleString("en-Us")
+    return newprice
+  }
+  else{
+    const value=parseFloat(discounted_price.toPrecision(2))
+    const newprice = value.toLocaleString("en-Us")
+    return newprice
+  }
+}
 
 export function ProductList(prop){
   return(
@@ -126,7 +195,13 @@ export function ProductList(prop){
       <div className='py-1 px-1'>
         <Link to="/detail" state={{from:prop.items}}><h1 className='font-semibold text-center'>{prop.name}</h1></Link>
         <Link to="/detail" state={{from:prop.items}}><Ratings reviews = {prop.reviews} totalR ={prop.totalR} /></Link>
-        <Link to="/detail" state={{from:prop.items}}><h1 className='font-semibold text-base my-2'>₦{prop.price}</h1></Link>
+        {!prop.discount && <Link to="/detail" state={{from:prop.items}}><h1 className='font-semibold text-[15px] md:text-base my-2'>₦{prop.price}</h1></Link>}
+        {prop.discount && <Link to="/detail" state={{from:prop.items}}><div className='font-semibold  text-[15px] md:text-base my-2 flex justify-around'>
+        <h1 className='gray-400 font-normal text-[15px] md:text-base'>
+          <span className='line-through decoration-gray-700'>₦{prop.price}</span> <span className='relative -left-1 bottom-2 text-xs text-[#ff3c00] font-bold'>-{prop.discount}%</span>
+        </h1>
+        <span>₦{convert(prop.price,prop.discount)}</span>
+        </div></Link>}
         <Link to="/detail" state={{from:prop.items}}><h3 className='text-xs text-gray-500'>{prop.store} items left</h3></Link>
       </div> 
     </div>
@@ -170,15 +245,15 @@ export function CatHeaeder2(props){
   )
 }
 
-export function StoreDetail(){
+export function StoreDetail(prop){
   return(
     <div>
     <h1 className='font-semibold text-lg'>Seller Info</h1>
     <div className='md:h-40 flex flex-col justify-center'>
        <ul>
-          <li>Store Name  <span className='font-semibold mx-2'>:</span> Samsung Stores</li>
-          <li>Products Available  <span className='font-semibold mx-2'>:</span> 54 Products</li>
-          <li> Store Category <span className='font-semibold mx-2'>:</span> Phones And Tablets</li>      
+          <li>Store Name  <span className='font-semibold mx-2'>:</span>{prop.name}</li>
+          <li>Products Available <span className='font-semibold mx-2'>:</span> {prop.count}</li>
+          <li> Store Category <span className='font-semibold mx-2'>:</span> {prop.category}</li>      
         </ul>
     </div>   
   </div> 

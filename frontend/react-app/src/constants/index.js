@@ -107,7 +107,8 @@ export const LatestDemo=[
        "reviews":4.2,
        "totalR":12,
        "store":54,
-       "price":"1500"
+       "price":"1,500",
+       "discount":10,
     },
     {
         "id":2,
@@ -116,7 +117,9 @@ export const LatestDemo=[
         "reviews":4.4,
         "totalR":15,
         "store":12,
-        "price":"123,000"
+        "price":"123,000",
+        "discount":null
+
      },
      {
         "id":3,
@@ -125,7 +128,8 @@ export const LatestDemo=[
         "reviews":4.7,
         "totalR":120,
         "store":12,
-        "price":"43,000"
+        "price":"43,000",
+        "discount":18
      },
      {
         "id":4,
@@ -134,7 +138,8 @@ export const LatestDemo=[
         "reviews":4.1,
         "totalR":15,
         "store":21,
-        "price":"5,500"
+        "price":"5,500",
+        "discount":22
      },
      {
         "id":5,
@@ -143,7 +148,8 @@ export const LatestDemo=[
         "reviews":4.2,
         "totalR":16,
         "store":25,
-        "price":"128,500"
+        "price":"128,500",
+        "discount":null
      },
      {
         "id":6,
@@ -152,7 +158,8 @@ export const LatestDemo=[
         "reviews":3.9,
         "totalR":15,
         "store":24,
-        "price":"2,500"
+        "price":"2,500",
+        "discount":5
      },
      {
         "id":7,
@@ -161,7 +168,8 @@ export const LatestDemo=[
         "reviews":4.2,
         "totalR":15,
         "store":24,
-        "price":"105,500"
+        "price":"105,500",
+        "discount":50
      },
      {
         "id":8,
@@ -170,7 +178,8 @@ export const LatestDemo=[
         "reviews":4.6,
         "totalR":15,
         "store":24,
-        "price":"5,200"
+        "price":"5,200",
+        "discount":15
      },
      {
         "id":9,
@@ -179,7 +188,8 @@ export const LatestDemo=[
         "reviews":2.5,
         "totalR":22,
         "store":19,
-        "price":"205,500"
+        "price":"205,500",
+        "discount":25
      },
      {
         "id":10,
@@ -188,7 +198,8 @@ export const LatestDemo=[
         "reviews":4.0,
         "totalR":15,
         "store":23,
-        "price":"5,500"
+        "price":"5,500",
+        "discount":10
      },
 ]
 export const AffiliateDemo = [
@@ -201,7 +212,9 @@ export const AffiliateDemo = [
             "reviews":4.2,
             "totalR":12,
             "store":54,
-            "price":"1500"
+            "price":"1500",
+            "discount":20
+            
          },
          {
              "id":2,
@@ -210,7 +223,8 @@ export const AffiliateDemo = [
              "reviews":4.4,
              "totalR":15,
              "store":12,
-             "price":"123,000"
+             "price":"123,000",
+             "discount":null
           },
           {
              "id":3,
@@ -219,13 +233,34 @@ export const AffiliateDemo = [
              "reviews":4.7,
              "totalR":120,
              "store":12,
-             "price":"43,000"
+             "price":"43,000",
+             "discount":5
           },
     ]
 
 },
 {"store":"samsung",
 "Products":[
+   {
+      "id":1,
+      "url":babyhat,
+      "name":"Leather Hat",
+      "reviews":4.2,
+      "totalR":12,
+      "store":54,
+      "price":"1500",
+      "discount":25
+   },
+   {
+       "id":2,
+       "url":lg1,
+       "name":"LG Smart Tv",
+       "reviews":4.4,
+       "totalR":15,
+       "store":12,
+       "price":"123,000",
+       "discount":18
+    },
     {
         "id":4,
         "url":trouser,
@@ -233,7 +268,8 @@ export const AffiliateDemo = [
         "reviews":4.1,
         "totalR":15,
         "store":21,
-        "price":"5,500"
+        "price":"5,500",
+        "discount":12
      },
      {
         "id":5,
@@ -242,7 +278,8 @@ export const AffiliateDemo = [
         "reviews":4.2,
         "totalR":16,
         "store":25,
-        "price":"128,500"
+        "price":"128,500",
+        "discount":null
      },
      {
         "id":6,
@@ -251,7 +288,8 @@ export const AffiliateDemo = [
         "reviews":3.9,
         "totalR":15,
         "store":24,
-        "price":"2,500"
+        "price":"2,500",
+       "discount":20
      },
      {
         "id":7,
@@ -260,7 +298,8 @@ export const AffiliateDemo = [
         "reviews":4.2,
         "totalR":15,
         "store":24,
-        "price":"105,500"
+        "price":"105,500",
+        "discount":null
      },
 ]
 
@@ -274,7 +313,8 @@ export const AffiliateDemo = [
         "reviews":4.1,
         "totalR":15,
         "store":21,
-        "price":"5,500"
+        "price":"5,500",
+        "discount":21
      },
      {
         "id":5,
@@ -283,7 +323,8 @@ export const AffiliateDemo = [
         "reviews":4.2,
         "totalR":16,
         "store":25,
-        "price":"128,500"
+        "price":"128,500",
+        "discount":20
      },
      {
         "id":6,
@@ -292,7 +333,8 @@ export const AffiliateDemo = [
         "reviews":3.9,
         "totalR":15,
         "store":24,
-        "price":"2,500"
+        "price":"2,500",
+        "discount":null
      },
      {
         "id":6,
@@ -301,7 +343,8 @@ export const AffiliateDemo = [
         "reviews":3.9,
         "totalR":15,
         "store":24,
-        "price":"2,500"
+        "price":"2,500",
+        "discount":20
      },
 ]
 
@@ -315,7 +358,8 @@ export const AffiliateDemo = [
         "reviews":4.2,
         "totalR":15,
         "store":24,
-        "price":"105,500"
+        "price":"105,500",
+        "discount":16
      },
      {
         "id":8,
@@ -324,7 +368,8 @@ export const AffiliateDemo = [
         "reviews":4.6,
         "totalR":15,
         "store":24,
-        "price":"5,200"
+        "price":"5,200",
+        "discount":19
      },
      {
         "id":9,
@@ -333,7 +378,8 @@ export const AffiliateDemo = [
         "reviews":2.5,
         "totalR":22,
         "store":19,
-        "price":"205,500"
+        "price":"205,500",
+        "discount":18
      },
      {
         "id":10,
@@ -342,7 +388,8 @@ export const AffiliateDemo = [
         "reviews":4.0,
         "totalR":15,
         "store":23,
-        "price":"5,500"
+        "price":"5,500",
+        "discount":19
      },
 ]
 
@@ -356,7 +403,8 @@ export const TopListtDemo=[
        "reviews":4.2,
        "totalR":12,
        "store":54,
-       "price":"1500"
+       "price":"1500",
+       "discount":25
     },
     {
         "id":2,
@@ -366,6 +414,8 @@ export const TopListtDemo=[
         "totalR":15,
         "store":12,
         "price":"123,000"
+        ,
+        "discount":22
      },
      {
         "id":3,
@@ -374,7 +424,8 @@ export const TopListtDemo=[
         "reviews":4.7,
         "totalR":120,
         "store":12,
-        "price":"43,000"
+        "price":"43,000",
+        "discount":null
      },
      {
         "id":4,
@@ -383,7 +434,8 @@ export const TopListtDemo=[
         "reviews":4.1,
         "totalR":15,
         "store":21,
-        "price":"5,500"
+        "price":"5,500",
+        "discount":18
      },
      {
         "id":5,
@@ -392,7 +444,8 @@ export const TopListtDemo=[
         "reviews":4.2,
         "totalR":16,
         "store":25,
-        "price":"128,500"
+        "price":"128,500",
+        "discount":19
      },
      {
         "id":6,
@@ -401,7 +454,8 @@ export const TopListtDemo=[
         "reviews":3.9,
         "totalR":15,
         "store":24,
-        "price":"2,500"
+        "price":"2,500",
+        "discount":16
      },
    //   {
    //      "id":7,
@@ -445,11 +499,169 @@ export const ProductDetailDemo={
    detail:
       {
       "id":9,
-      "url":samsung2,
-      "name":"Galaxy TAB max spec",
+      "url":camera,
+      "name":"Galaxy TAB max specss",
       "reviews":2.5,
       "totalR":22,
+      "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta rerum sapiente, harum neque odit veniam quas at dignissimos velit tempora ?",
       "store":19,
-      "price":"205,500"
-   }
+      "discount":25,
+      review:[{
+         "name":"Olusanya Ayomide",
+         "title":"Lovely",
+         "content":"Item was as advertised,i am satisfied",
+         "time":"05-10-2022",
+         "rating":4,
+      },{
+         "name":"Olusanya Ayomide",
+         "title":"Lovely",
+         "content":"Item was as advertised,i am satisfied",
+         "time":"05-10-2022",
+         "rating":4,
+      },{
+         "name":"Olusanya Ayomide",
+         "title":"Lovely",
+         "content":"Item was as advertised,i am satisfied",
+         "time":"05-10-2022",
+         "rating":4,
+      }],
+      "price":"205,500",
+      stores:{
+         name:"Gionee Stores",
+         ProductCount:"55 Products",
+         Category:"Electronics"
+      }
+   },
+
 }
+export const ProductDetailDemo2={
+   detail:
+      {
+      "id":4,
+      "url":trouser,
+      "name":"Trouser for Men",
+      "reviews":4.6,
+      "totalR":22,
+      "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta rerum sapiente, harum neque odit veniam quas at dignissimos velit tempora ?",
+      "store":19,
+      "price":"3,500",
+      "discount":18,
+      review:[{
+         "name":"Olusanya Ayomide",
+         "title":"Lovely",
+         "content":"Item was as advertised,i am satisfied",
+         "time":"05-10-2022",
+         "rating":4,
+      },{
+         "name":"Olusanya Ayomide",
+         "title":"Lovely",
+         "content":"Item was as advertised,i am satisfied",
+         "time":"05-10-2022",
+         "rating":4,
+      },{
+         "name":"Olusanya Ayomide",
+         "title":"Lovely",
+         "content":"Item was as advertised,i am satisfied",
+         "time":"05-10-2022",
+         "rating":4,
+      }],
+      stores:{
+         name:"Gionee Stores",
+         ProductCount:"55 Products",
+         Category:"Electronics"
+      }
+   },
+
+}
+export const ProductDetailDemo3={
+   detail:
+      {
+      "id":9,
+      "url":alexa,
+      "name":"Amazon Loud Speaker",
+      "reviews":4.2,
+      "totalR":0,
+      "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta rerum sapiente, harum neque odit veniam quas at dignissimos velit tempora ?",
+      "store":19,
+      "price":"195,500",
+      "discount":19,
+      review:[],
+      stores:{
+         name:"Gionee Stores",
+         ProductCount:"55 Products",
+         Category:"Electronics"
+      }
+   },
+
+}
+export const SimilarProduct= [{
+   "id":2,
+   "url":lg1,
+   "name":"LG Smart Tv",
+   "reviews":4.4,
+   "totalR":15,
+   "store":12,
+   "price":"123,000",
+   "discount":25,
+},
+   {
+   "id":4,
+   "url":trouser,
+   "name":":Cyan Fancy Trouser",
+   "reviews":4.1,
+   "totalR":15,
+   "store":21,
+   "price":"5,500",
+   "discount":18,
+},
+{
+   "id":5,
+   "url":samsung01,
+   "name":":Samsung LG ultra",
+   "reviews":4.2,
+   "totalR":16,
+   "store":25,
+   "price":"128,500",
+   "discount":24,
+},
+{
+   "id":6,
+   "url":trouser2,
+   "name":":leather Fancy Trouser",
+   "reviews":3.9,
+   "totalR":15,
+   "store":24,
+   "price":"2,500",
+   "discount":30,
+},
+{
+   "id":7,
+   "url":lg2,
+   "name":":Cyan Fancy Trouser",
+   "reviews":4.2,
+   "totalR":15,
+   "store":24,
+   "price":"105,500",
+   "discount":3,
+},
+{
+   "id":8,
+   "url":lg3,
+   "name":"HD spectro Max TV",
+   "reviews":4.6,
+   "totalR":15,
+   "store":24,
+   "price":"5,200",
+   "discount":null,
+},
+{
+   "id":9,
+   "url":alexa,
+   "name":"Galaxy TAB max spec",
+   "reviews":2.5,
+   "totalR":22,
+   "store":19,
+   "price":"205,500",
+   "discount":22,
+},
+]

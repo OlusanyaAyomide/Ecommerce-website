@@ -31,7 +31,7 @@ export default function Affiliate() {
                 <div className='row bg-white container'>
                 {items.Products.map((item,key2)=>{
                     return(
-                          <ProductList name = {item.name} reviews = {item.reviews} url = {item.url} totalR = {item.totalR} price ={item.price} store ={item.store} key ={key2} items={item}/>
+                          <ProductList name = {item.name} reviews = {item.reviews} url = {item.url} totalR = {item.totalR} price ={item.price} store ={item.store} key ={key2} items={item} discount={item.discount}/>
                     )
                 })}
                 </div>

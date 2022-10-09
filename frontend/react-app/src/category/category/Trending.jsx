@@ -7,7 +7,7 @@ export default function Trending() {
     const trending = useSelector((state=>state.category.trending))
     const trendingList = trending.map((item,key)=>{
         return(
-        <ProductList name = {item.name} reviews = {item.reviews} url = {item.url} totalR = {item.totalR} price ={item.price} store ={item.store} key ={key} items={item}/>
+        <ProductList name = {item.name} reviews = {item.reviews} url = {item.url} totalR = {item.totalR} price ={item.price} store ={item.store} key ={key} items={item} discount={item.discount}/>
         )
     })
   return (

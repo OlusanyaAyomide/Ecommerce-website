@@ -7,7 +7,7 @@ export default function Allcategory() {
     const Allproducts = useSelector((state=>state.category.allstores))
     const AllProductList = Allproducts.map((item,key)=>{
         return(
-            <ProductList name = {item.name} reviews = {item.reviews} url = {item.url} totalR = {item.totalR} price ={item.price} store ={item.store} key ={key} items={item}/>)
+            <ProductList name = {item.name} reviews = {item.reviews} url = {item.url} totalR = {item.totalR} price ={item.price} store ={item.store} key ={key} items={item} discount={item.discount}/>)
     })
   return (
    <section className='container'>

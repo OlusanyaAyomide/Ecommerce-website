@@ -5,6 +5,8 @@ import Latests from './home/latest'
 import Affiliate from './home/Affiliate'
 import { Latestfetch,AffiliateFetch,AutoPredictFetch,FeaturedFetch,CategoryFetch } from '../store/datafetch'
 import { useSelector,useDispatch } from 'react-redux'
+import { detailaction } from '../store/detailslice'
+import {categoryactions} from "../store/categoryslice"
 
 
 let first = true
@@ -12,7 +14,7 @@ let first = true
 export function Home() {
   
   const dispatch = useDispatch()
-  const UserInput = useSelector((state=>state.product.search.userinput))
+  const loaded = useSelector((state=>state.product.loaded))
 
   useEffect(()=>{
     dispatch(Latestfetch())
@@ -28,14 +30,18 @@ export function Home() {
   
   useEffect(()=>{
     dispatch(CategoryFetch())
+    dispatch(detailaction.setadsactive())
+    dispatch(categoryactions.setasactive())
   },[])
     return(
-      <div className='bg-[#d1c9b2] '>
+      <>
+      {loaded &&  <div className='bg-[#d1c9b2] '>
         <div className="bg-slate-100"><Header/></div>
         <div><Caetegory/></div>
         <div><Latests/></div>
         <div><Affiliate/></div>
-      </div>
+      </div>}
+      </>
     
     )
 }

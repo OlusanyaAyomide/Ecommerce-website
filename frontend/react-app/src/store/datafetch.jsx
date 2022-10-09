@@ -1,5 +1,5 @@
 import React from 'react'
-import { LatestDemo,AffiliateDemo,Searchresults,categories,SlideImage,TopListtDemo,ProductDetailDemo } from '../constants'
+import { LatestDemo,AffiliateDemo,Searchresults,categories,SlideImage,TopListtDemo,ProductDetailDemo,SimilarProduct,ProductDetailDemo2,ProductDetailDemo3  } from '../constants'
 import { categoryactions } from './categoryslice'
 import { Productactions } from './productslice'
 import { detailaction } from './detailslice'
@@ -45,9 +45,25 @@ export function AllcategoryStoreFetch(){
         return dispatch(categoryactions.updateallstores(LatestDemo))
     }
 }
-export function DetailFetch(){
+export function DetailFetch(prop){
     return async(dispatch)=>{
-        return dispatch(detailaction.setproduct(ProductDetailDemo.detail))
+        console.log(prop)
+        if(prop <4){
+            console.log("low is here")
+             return dispatch(detailaction.setproduct(ProductDetailDemo))}
+        if(prop >=3 && prop < 7 ){
+            console.log("Med is here")
+            return dispatch(detailaction.setproduct(ProductDetailDemo2))}
+        if(prop >=7){
+            console.log("Top is here")
+             return dispatch(detailaction.setproduct(ProductDetailDemo3))}
+    
+    }
+}
+export function SimilarFetch(prop){
+    console.log(prop)
+    return async(dispatch)=>{ 
+        return dispatch(detailaction.setsimilarproduct(SimilarProduct))
     }
 }
 
