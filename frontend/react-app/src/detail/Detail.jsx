@@ -8,17 +8,18 @@ import { useDispatch,useSelector } from 'react-redux'
 import { DetailFetch,SimilarFetch } from '../store/datafetch'
 import Similar from './detail/Similar'
 import Review from "./detail/Review"
-
+import { detailaction } from '../store/detailslice'
 
 export default function Detail() {
     const isloaded = useSelector((state=>state.detail.loaded))
+    const render = useSelector((state=>state.detail.render))
     const dispatch = useDispatch()
     const location=useLocation()
     const [first,setfirst] = useState(false)
     const curID= useSelector((state=>state.detail.curId))
     const {from} = location.state
     const Select = !first?from.id:curID
-    console.log(first)
+
 
 
     useEffect(()=>{
@@ -31,11 +32,12 @@ export default function Detail() {
     useEffect(()=>{
       window.scrollTo(0,0)
       setfirst(true)
+      dispatch(detailaction.setrender(true))
     })
     
   return (
     <>
-   {isloaded &&  <div>
+   {isloaded && render && <div>
        <div><Header/></div>
        <div><Hero/></div>
        <div><Feedback/></div>

@@ -498,14 +498,14 @@ export const TopListtDemo=[
 export const ProductDetailDemo={
    detail:
       {
-      "id":9,
+      "id":2,
       "url":camera,
       "name":"Galaxy TAB max specss",
       "reviews":2.5,
       "totalR":22,
       "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta rerum sapiente, harum neque odit veniam quas at dignissimos velit tempora ?",
       "store":19,
-      "discount":25,
+      "discount":null,
       review:[{
          "name":"Olusanya Ayomide",
          "title":"Lovely",

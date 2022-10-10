@@ -18,7 +18,6 @@ export function AffiliateFetch(){
 }
 
 export function AutoPredictFetch(prop){
-    console.log(prop)
     return async(dispatch)=>{
         return dispatch(Productactions.updateautopredict(Searchresults))
     }
@@ -47,21 +46,16 @@ export function AllcategoryStoreFetch(){
 }
 export function DetailFetch(prop){
     return async(dispatch)=>{
-        console.log(prop)
         if(prop <4){
-            console.log("low is here")
              return dispatch(detailaction.setproduct(ProductDetailDemo))}
         if(prop >=3 && prop < 7 ){
-            console.log("Med is here")
             return dispatch(detailaction.setproduct(ProductDetailDemo2))}
         if(prop >=7){
-            console.log("Top is here")
              return dispatch(detailaction.setproduct(ProductDetailDemo3))}
     
     }
 }
 export function SimilarFetch(prop){
-    console.log(prop)
     return async(dispatch)=>{ 
         return dispatch(detailaction.setsimilarproduct(SimilarProduct))
     }

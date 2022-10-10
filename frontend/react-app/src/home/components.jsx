@@ -182,6 +182,19 @@ export function convert(price,discount){
   }
 }
 
+export function getCartPrice(value,discount){
+  let prize = Number(value.replace(",",""))
+  let discounted_price = prize-(discount/100*prize)
+  if (discounted_price>10000){
+    const value=parseFloat(discounted_price.toPrecision(3)) 
+    return value
+  }
+  else{
+    const value=parseFloat(discounted_price.toPrecision(2))
+    return value
+  }
+}
+
 export function ProductList(prop){
   return(
     <div className=" w-6/12 md:w-4/12 lg:w-3/12 mb-3 ">

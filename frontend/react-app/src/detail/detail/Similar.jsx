@@ -9,6 +9,7 @@ export default function Similar(){
   const dispatch = useDispatch()
   function handleChange(itemid){
     console.log(itemid)
+      dispatch(detailaction.setrender(false))
       // console.log(e.currentTarget.getAttribute('data-user'))
       dispatch(detailaction.updatecurrentid(itemid))
   }

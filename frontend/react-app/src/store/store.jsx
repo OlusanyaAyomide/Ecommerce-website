@@ -10,5 +10,6 @@ export const store = configureStore({
         cart:cartSlice.reducer,
         category:categoryslice.reducer,
         detail:Detailslice.reducer,
+        cart:cartSlice.reducer,
     }
 })

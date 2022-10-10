@@ -1,19 +1,40 @@
 import React from 'react'
 import { Ratings } from '../../home/components'
 import { MinHeader2,StoreDetail } from '../../home/components'
-import { useSelector } from 'react-redux'
+import { useSelector,useDispatch } from 'react-redux'
 import { convert } from '../../home/components'
+import { Cartaction } from '../../store/cartslice'
+import { getCartPrice } from '../../home/components'
+
 
 export default function Feedback() {
     const products = useSelector((state=>state.detail.product))
     const product = products.detail
+    const render = useSelector((state=>state.detail.render))
     const AffStores = products.detail.stores
+    const dispatch = useDispatch()
+    const cartItems=useSelector((state=>state.cart))
 
+    function handleCartAdd(){
+        dispatch(Cartaction.addproduct({product}))
+            window.localStorage.removeItem("cart")
+            const CartObjects = {
+                productList:cartItems.productlist,
+                repeted:cartItems.repeated,
+                quantity:cartItems.quantity,
+                price:cartItems.price
+            }
+            console.log(CartObjects)
+            window.localStorage.setItem("cart",JSON.stringify(CartObjects))
+
+      
+            // prize:getprize(),
+    }
     function AddToCart(){
         return(
         <div className='row mt flex items-center h-[50px] fixed md:static bottom-0 w-full rounded-lg px-2 md:px-0 z-50 bg-[#5858ec]'>     
             <button className='block w-6/12 text-white border-r h-full text-left'> <i className='fa fa-heart text-white text-lg px-4'></i> Add to wishList</button>
-            <button className='w-6/12  text-white text-left flex h-full items-center'><i className='fa fa-cart-plus text-white text-2xl px-4'></i> Add to cart</button>
+            <button className='w-6/12 text-white text-left flex h-full items-center' onClick={handleCartAdd}><i className='fa fa-cart-plus text-white text-2xl px-4'></i> Add to cart</button>
         </div>
         )
     }
