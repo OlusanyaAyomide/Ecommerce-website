@@ -29,7 +29,6 @@ export default function Category() {
         <div className='bg-slate-100'><Header/></div>
         <div><Trending/></div>
         <div><Allcategory/></div>
-
     </div>
   )
 }

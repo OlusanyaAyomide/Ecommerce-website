@@ -7,9 +7,9 @@ import { Link } from 'react-router-dom'
 export function Cart(props) {
   const counts = useSelector((state=>state.cart.quantity))
   return (
-    <span className='inline-block fa fa-shopping-cart relative text-3xl ml-1'> 
+    <Link to="/cart"><span className='inline-block fa fa-shopping-cart relative text-3xl ml-1'> 
         <span className='absolute -top-3 md:-top-[10px] text-sm px-1 rounded-full py-0 bg-red-500 text-white left-3  font-semibold'>{counts>0?counts:''}</span>
-    </span>
+    </span></Link>
   )
 }
 export function Sliders(props){

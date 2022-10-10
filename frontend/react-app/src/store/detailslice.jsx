@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const Detailslice =createSlice({
     name:"DetailSlice",
-    initialState:{product:{},loaded:false,active:false,similarproduct:[],curId:0,render:false},
+    initialState:{product:{},loaded:false,active:false,similarproduct:[],curId:0,render:false,popout:false},
     reducers:{
         setproduct(state,action){
             state.product=action.payload
@@ -19,6 +19,9 @@ export const Detailslice =createSlice({
         },
         setrender(state,action){
             state.render=action.payload
+        },
+        setpopout(state,action){
+            state.popout = action.payload
         }
 
     }

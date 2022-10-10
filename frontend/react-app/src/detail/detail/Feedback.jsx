@@ -4,7 +4,7 @@ import { MinHeader2,StoreDetail } from '../../home/components'
 import { useSelector,useDispatch } from 'react-redux'
 import { convert } from '../../home/components'
 import { Cartaction } from '../../store/cartslice'
-import { getCartPrice } from '../../home/components'
+import { detailaction } from '../../store/detailslice'
 
 
 export default function Feedback() {
@@ -13,22 +13,16 @@ export default function Feedback() {
     const render = useSelector((state=>state.detail.render))
     const AffStores = products.detail.stores
     const dispatch = useDispatch()
-    const cartItems=useSelector((state=>state.cart))
+    const popout = useSelector((state=>state.detail.popout))
 
     function handleCartAdd(){
-        dispatch(Cartaction.addproduct({product}))
-            window.localStorage.removeItem("cart")
-            const CartObjects = {
-                productList:cartItems.productlist,
-                repeted:cartItems.repeated,
-                quantity:cartItems.quantity,
-                price:cartItems.price
-            }
-            console.log(CartObjects)
-            window.localStorage.setItem("cart",JSON.stringify(CartObjects))
+        dispatch(Cartaction.addproduct({product}))  
+        // window.localStorage.clear()
+        dispatch(detailaction.setpopout(true))
+        setTimeout(()=>{
+            dispatch(detailaction.setpopout(false))
+        },2000)
 
-      
-            // prize:getprize(),
     }
     function AddToCart(){
         return(
@@ -40,6 +34,9 @@ export default function Feedback() {
     }
   return (
     <section className='border -mt-[2px]'>
+        {popout && <div className='flex justify-center bg-[#36f736] py-2 w-full z-50 text-white fixed top-0'>
+            Product succesfully added to cart succesfully
+        </div>}
         <div className="row">
         <div className='w-full md:w-4/12 lg:w-3/12 bg-slate-300 md:py-2 hidden md:block'>
                 <div className='bg-white container'>

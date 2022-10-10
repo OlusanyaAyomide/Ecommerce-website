@@ -9,6 +9,7 @@ import Category from "./category/index"
 import Detail from './detail/Detail'
 import { useSelector,useDispatch } from 'react-redux'
 import {AutoPredictFetch,CategoryFetch} from "./store/datafetch"
+import CartMain from './CartList/CartMain'
 
 let first = false
 export default function Main() {
@@ -39,6 +40,8 @@ export default function Main() {
             <Route path='/detail' element={
             dactive?<Detail/>:(<Navigate replace to="/"/>)
             }></Route>
+            <Route path='/cart' element={<CartMain/>}></Route>
+
          </Routes>
     </BrowserRouter>
   )

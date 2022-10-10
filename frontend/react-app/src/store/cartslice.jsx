@@ -29,7 +29,7 @@ export const cartSlice = createSlice({
                 state.productlist.push(product)
                 state.quantity +=1
                 state.price += getprize()
-                state.repeated = {...state.repeated,[product.id]:{
+                state.repeated = {...state.repeated,[`product${product.id}`]:{
                     price:getprize(),
                     count:1
                 }}
@@ -37,9 +37,9 @@ export const cartSlice = createSlice({
             else{
                 state.quantity += 1
                 state.price+=getprize()
-                let price = state.repeated[product.id].price + getprize()
-                let count = state.repeated[product.id].count + 1
-                state.repeated = {...state.repeated,[product.id]:{
+                let price = state.repeated[`product${product.id}`].price + getprize()
+                let count = state.repeated[`product${product.id}`].count + 1
+                state.repeated = {...state.repeated,[`product${product.id}`]:{
                     price:price,
                     count:count
                 }}
