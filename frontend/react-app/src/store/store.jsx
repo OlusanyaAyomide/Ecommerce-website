@@ -3,6 +3,7 @@ import { ProductSlice } from "./productslice";
 import { cartSlice } from "./cartslice";
 import { categoryslice } from "./categoryslice";
 import { Detailslice } from "./detailslice";
+import { SearchSlice } from "./searchslice";
 
 export const store = configureStore({
     reducer:{
@@ -10,5 +11,6 @@ export const store = configureStore({
         cart:cartSlice.reducer,
         category:categoryslice.reducer,
         detail:Detailslice.reducer,
+        search:SearchSlice.reducer,
     }
 })

@@ -194,6 +194,12 @@ export function getCartPrice(value,discount){
     return value
   }
 }
+export function getExactPrice(value,discount){
+  console.log(value)
+  let prize = Number(value.replace(",",""))
+  let discounted_price = prize-(discount/100*prize)
+  return discounted_price
+}
 
 export function ProductList(prop){
   return(
@@ -270,5 +276,13 @@ export function StoreDetail(prop){
         </ul>
     </div>   
   </div> 
+  )
+}
+export function MinHeader4(props){
+  return(
+    <div className='flex justify-center py-4 mb-2'>
+    <h1 className='py-1 px-3 bg-[#5858ec] relative header-design before:left-[65px] text-white z-20 rounded-md'>
+       {props.label}</h1>
+    </div>
   )
 }

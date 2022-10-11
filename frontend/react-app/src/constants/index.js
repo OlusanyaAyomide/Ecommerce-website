@@ -525,7 +525,7 @@ export const ProductDetailDemo={
          "time":"05-10-2022",
          "rating":4,
       }],
-      "price":"205,500",
+      "price":"15,500",
       stores:{
          name:"Gionee Stores",
          ProductCount:"55 Products",
@@ -583,7 +583,7 @@ export const ProductDetailDemo3={
       "totalR":0,
       "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta rerum sapiente, harum neque odit veniam quas at dignissimos velit tempora ?",
       "store":19,
-      "price":"195,500",
+      "price":"19,500",
       "discount":19,
       review:[],
       stores:{
@@ -601,7 +601,7 @@ export const SimilarProduct= [{
    "reviews":4.4,
    "totalR":15,
    "store":12,
-   "price":"123,000",
+   "price":"12,000",
    "discount":25,
 },
    {
@@ -641,7 +641,7 @@ export const SimilarProduct= [{
    "reviews":4.2,
    "totalR":15,
    "store":24,
-   "price":"105,500",
+   "price":"15,500",
    "discount":3,
 },
 {
@@ -661,7 +661,7 @@ export const SimilarProduct= [{
    "reviews":2.5,
    "totalR":22,
    "store":19,
-   "price":"205,500",
+   "price":"4,500",
    "discount":22,
 },
 ]

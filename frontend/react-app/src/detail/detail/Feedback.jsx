@@ -24,11 +24,14 @@ export default function Feedback() {
         },2000)
 
     }
+
+
     function AddToCart(){
         return(
         <div className='row mt flex items-center h-[50px] fixed md:static bottom-0 w-full rounded-lg px-2 md:px-0 z-50 bg-[#5858ec]'>     
             <button className='block w-6/12 text-white border-r h-full text-left'> <i className='fa fa-heart text-white text-lg px-4'></i> Add to wishList</button>
             <button className='w-6/12 text-white text-left flex h-full items-center' onClick={handleCartAdd}><i className='fa fa-cart-plus text-white text-2xl px-4'></i> Add to cart</button>
+            
         </div>
         )
     }
@@ -46,7 +49,7 @@ export default function Feedback() {
                 </div>
             </div>
             <div className='w-full md:w-8/12 lg:w-9/12 bg-slate-300 py-2'>
-                <div className='w-full bg-white md:h-[308px]'>
+                <div className='w-full bg-white md:h-[332px]'>
                 <div className='md:w-11/12 lg:w-8/12 xl:w-7/12 mx-auto'>
                 <div className=' px-4 py-2 md:px-6  '>
                     <span className='inline-block text-sm rounded-md bg-[#5858ec] px-2 text-white'>Free Delivery</span>

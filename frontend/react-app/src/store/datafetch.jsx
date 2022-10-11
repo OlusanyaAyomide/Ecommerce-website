@@ -3,6 +3,8 @@ import { LatestDemo,AffiliateDemo,Searchresults,categories,SlideImage,TopListtDe
 import { categoryactions } from './categoryslice'
 import { Productactions } from './productslice'
 import { detailaction } from './detailslice'
+import { Cartaction } from './cartslice'
+import { searchaction } from './searchslice'
 
 
 
@@ -60,5 +62,16 @@ export function SimilarFetch(prop){
         return dispatch(detailaction.setsimilarproduct(SimilarProduct))
     }
 }
+export function RecentFetch(){
+    return async(dispatch)=>{
+        return dispatch(Cartaction.setrecent(LatestDemo))
+    }
+}
 
+export function SearchFetch(prop){
+    console.log(prop)
+    return async(dispatch)=>{
+        return dispatch(searchaction.updatesearch(LatestDemo))
+    }
+}
 

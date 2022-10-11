@@ -5,7 +5,7 @@ import { logo } from '../../assests'
 
 export default function CatHero() {
   const CategoryList = useSelector((state=>state.product.allcategory))
-  const product = useSelector((state=>state.detail.product)).detail
+
   const CategoryItems = CategoryList.map((items,key)=>{
     return(
       <Link state={{from:items,all:CategoryList}} to={'/category'}  key ={key }><li className='py-1 hover:before:bg-black/20  dark-cover relative before:animate-all rounded-sm overflow-hidden before:duration-300 text-gray-900'>{items.name}</li></Link>

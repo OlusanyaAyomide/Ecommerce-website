@@ -1,5 +1,5 @@
 import React from 'react'
-import { MinHeader } from '../../home/components'
+import { MinHeader4 } from '../../home/components'
 import { useSelector,useDispatch } from 'react-redux'
 import { Ratings } from '../../home/components'
 import { detailaction } from '../../store/detailslice'
@@ -8,7 +8,6 @@ import { convert } from '../../home/components'
 export default function Similar(){
   const dispatch = useDispatch()
   function handleChange(itemid){
-    console.log(itemid)
       dispatch(detailaction.setrender(false))
       // console.log(e.currentTarget.getAttribute('data-user'))
       dispatch(detailaction.updatecurrentid(itemid))
@@ -39,7 +38,7 @@ export default function Similar(){
     <section className="container bg-slate-300">
       <div className='-mx-4 md:-mx-6 pt-2'>
             <div className='bg-slate-200'>
-            <MinHeader label="Similar Products"/>
+            <MinHeader4 label="Similar Products"/>
             </div>
         </div>
       <div className='row -mx-2 px-4 bg-white rounded-md py-2'>
