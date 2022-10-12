@@ -8,18 +8,39 @@ import { store } from './store/store'
 import Category from "./category/index"
 import Detail from './detail/Detail'
 import { useSelector,useDispatch } from 'react-redux'
-import {AutoPredictFetch,CategoryFetch} from "./store/datafetch"
+import {AutoPredictFetch,CategoryFetch,InitiaTokenFetch} from "./store/datafetch"
 import CartMain from './CartList/CartMain'
 import Search from './search/Search'
 import Login from './login/Login'
 
 let first = false
+let firstrender = true
+
 export default function Main() {
   const dispatch = useDispatch()
   const UserInput = useSelector((state=>state.product.search.userinput))
   const dactive = useSelector((state=>state.detail.active))
   const catActive = useSelector((state=>state.category.active))
   const searchparam = useSelector((state=>state.search.params))
+  const auth = useSelector((state=>state.auth))
+
+
+
+
+  // if (firstrender){window.localStorage.setItem("access",JSON.stringify("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTY3MzM3MTAzMywiaWF0IjoxNjY1NTk1MDMzLCJqdGkiOiI5MjFlZWU3ODQ4YWQ0YzE4ODE2ODg4YjIyYzhhODNhZiIsInVzZXJfaWQiOjF9.mD8yoqiK26Y-H53r5V3PE1okHPyk9tpqVS8ve9wkB20"))}
+  console.log(window.localStorage.getItem("access"))
+  useEffect(()=>{
+    console.log("aliveeee")
+    if (firstrender){
+      firstrender=false
+      const token = JSON.parse(window.localStorage.getItem("access"))
+      if (token !== null){
+        console.log(token)
+          dispatch(InitiaTokenFetch(token))
+      }
+  }
+  },[])
+
   useEffect(()=>{
     if (first){
       first = false

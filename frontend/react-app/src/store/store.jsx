@@ -4,6 +4,7 @@ import { cartSlice } from "./cartslice";
 import { categoryslice } from "./categoryslice";
 import { Detailslice } from "./detailslice";
 import { SearchSlice } from "./searchslice";
+import { authslice } from "./authslice";
 
 export const store = configureStore({
     reducer:{
@@ -12,5 +13,6 @@ export const store = configureStore({
         category:categoryslice.reducer,
         detail:Detailslice.reducer,
         search:SearchSlice.reducer,
+        auth:authslice.reducer,
     }
 })

@@ -5,8 +5,10 @@ import { Productactions } from './productslice'
 import { detailaction } from './detailslice'
 import { Cartaction } from './cartslice'
 import { searchaction } from './searchslice'
+import { authActions } from './authslice'
 
 
+const host = "http://127.0.0.1:8000"
 
 export function Latestfetch() {
     return async(dispatch)=>{
@@ -75,3 +77,26 @@ export function SearchFetch(prop){
     }
 }
 
+export function InitiaTokenFetch(token){
+    console.log(token)
+    return async(dispatch)=>{
+        async function FetchToken(){
+            const res = await fetch(`${host}/auth/api/token/refresh`,{
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify({"refresh":token})
+            })
+            const data =await res.json()
+            console.log(data)
+            return data
+        }
+        try{
+            const response =await FetchToken()
+            const test = await dispatch(authActions.setTokens(response))
+       
+        }
+        catch{"error encoutered"}
+    }
+}
