@@ -38,7 +38,7 @@ export default function Detail() {
   return (
     <>
    {isloaded && render && <div>
-       <div><Header/></div>
+        <div><Header/></div>
        <div><Hero/></div>
        <div><Feedback/></div>
        <div><Review/></div>

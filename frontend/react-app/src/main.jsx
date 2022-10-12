@@ -11,6 +11,7 @@ import { useSelector,useDispatch } from 'react-redux'
 import {AutoPredictFetch,CategoryFetch} from "./store/datafetch"
 import CartMain from './CartList/CartMain'
 import Search from './search/Search'
+import Login from './login/Login'
 
 let first = false
 export default function Main() {
@@ -18,6 +19,7 @@ export default function Main() {
   const UserInput = useSelector((state=>state.product.search.userinput))
   const dactive = useSelector((state=>state.detail.active))
   const catActive = useSelector((state=>state.category.active))
+  const searchparam = useSelector((state=>state.search.params))
   useEffect(()=>{
     if (first){
       first = false
@@ -42,7 +44,10 @@ export default function Main() {
             dactive?<Detail/>:(<Navigate replace to="/"/>)
             }></Route>
             <Route path='/cart' element={<CartMain/>}></Route>
-            <Route path='/search' element={<Search/>}></Route>
+            <Route path='/search' element={
+              searchparam?<Search/>:(<Navigate replace to="/"/>)}>
+            </Route>
+            <Route path='/login' element={<Login/>}></Route>
           </Routes>
     </BrowserRouter>
   )

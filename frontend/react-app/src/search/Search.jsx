@@ -4,18 +4,23 @@ import CartHero from '../CartList/cartlist/CartHero'
 import { useSelector,useDispatch } from 'react-redux'
 import { SearchFetch } from '../store/datafetch'
 import { useEffect } from 'react'
+import Result from './search/Result'
 
 export default function Search() {
   const dispatch = useDispatch()
   const userInput = useSelector((state=>state.search.params))
+  const loaded= useSelector((state=>state.search.loaded))
   console.log(userInput)
+  console.log(loaded)
   useEffect(()=>{
     dispatch(SearchFetch(userInput))
   },[userInput])
   return (
-    <>
-    <div><Header/></div>
-    <div><CartHero/></div>
-    </>
+    <> {loaded && 
+    <div>
+      <div><Header/></div>
+      <div><CartHero/></div>
+      <div><Result/></div>
+    </div>}</>
   )
 }

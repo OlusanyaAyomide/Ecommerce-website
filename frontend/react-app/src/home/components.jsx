@@ -286,3 +286,12 @@ export function MinHeader4(props){
     </div>
   )
 }
+export function MinHeaderDy(props){
+  console.log(props.left)
+  return(
+    <div className='flex justify-center py-4 mb-2'>
+    <h1 className={`py-1 px-3 bg-[#5858ec] relative header-design before:left-[90px] text-white z-20 rounded-md`}>
+       {props.label}</h1>
+    </div>
+  )
+}

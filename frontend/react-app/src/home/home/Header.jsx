@@ -9,6 +9,8 @@ import { Scrolling } from '../xanimation.jsx'
 import { useSelector,useDispatch } from 'react-redux'
 import { Productactions } from '../../store/productslice.jsx'
 import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { searchaction } from '../../store/searchslice.jsx'
 
 
 
@@ -25,24 +27,42 @@ export default function Header(){
   const loaded = useSelector((state=>state.product.featureloaded))
   const CategoryList = useSelector((state=>state.product.allcategory))
   const Searchresult= useSelector((state=>state.product.search.autopredict))
-
+  const navigate=useNavigate()
+  const [params,setparams] =useState("")
   const CategoryItems = CategoryList.map((items,key)=>{
     // console.log(items)
     return(
       <Link state={{from:items,all:CategoryList}} to={'/category'}  key ={key }><li className='py-1 hover:before:bg-black/20  dark-cover relative before:animate-all rounded-sm overflow-hidden before:duration-300 text-gray-900'>{items.name}</li></Link>
     )
   })
+  function Autocomplete(value){
+    console.log(value)
+    navigate("/search")
+    dispatch(searchaction.updateparams(value))
+  }
   const SearchList  = Searchresult.map((item,key)=>{
     return(
-      <li key={key} className="text-[16px] my-1 text-gray-800">
-        <a href={`#${item.id}`}>{item.name}</a>
+      <li key={key} className="text-[16px] my-1 text-gray-800" >
+        <button onClick={()=>{Autocomplete(item.name)}}> {item.name} </button>
       </li>
     )
   })
+  function changeInput(e){
+    setparams(e.target.value)
 
+  }
+
+  function handleSearch(){
+    console.log(params)
+    dispatch(searchaction.updateparams(params))
+    navigate("/search")
+  }
 
   function Blurout(){
-    setisSearching(false)
+    setTimeout(()=>{
+       setisSearching(false)
+    },300)
+
   }
   function dropdown(){
     setdrop((prev=>!prev))
@@ -102,8 +122,8 @@ export default function Header(){
           </div> 
         </div>
         <div className="w-7/12 md:w-5/12 flex items-center ">
-            <input type="text" placeholder='Search' className='input' onKeyDown={SearchDiv} onBlur={Blurout}/>
-            <button className='px-2 py-1 rounded-tr-md rounded-br-md bg-[#5858ec]'><i className='fa fa-search text-white text-2xl'></i></button>
+            <input type="text" placeholder='Search' className='input' onKeyDown={SearchDiv} onBlur={Blurout} onChange={changeInput}/>
+            <button onClick={handleSearch} className='px-2 py-1 rounded-tr-md rounded-br-md bg-[#5858ec]'><i className='fa fa-search text-white text-2xl'></i></button>
             <span className='md:hidden'><Cart name = {0}/></span>
         </div> 
         <div className='md:w-3/12 hidden md:flex relative items-center justify-between px-1'>
@@ -122,8 +142,8 @@ export default function Header(){
           {!toggle && <button><span className='inline-block fa fa-bars text-3xl md:hidden' onClick={changToggle}></span></button>}
           {toggle && <button><span className='inline-block fa fa-close text-3xl md:hidden' onClick={changToggle}></span></button>}
           </div>
-          <div className='w-8/12 flex'><input type="text" placeholder='Search' className='input' onKeyDown={SearchDiv} onBlur={Blurout}/> 
-          <button className='px-2 py-1 rounded-tr-md rounded-br-md bg-[#5858ec]'><i className='fa fa-search text-white text-2xl'></i></button>
+          <div className='w-8/12 flex'><input type="text" placeholder='Search' className='input' onKeyDown={SearchDiv} onBlur={Blurout} onChange={changeInput}/> 
+          <button className='px-2 py-1 rounded-tr-md rounded-br-md bg-[#5858ec]' onClick={handleSearch}><i className='fa fa-search text-white text-2xl'></i></button>
           </div>
           <div className='w-2/12 flex justify-center'>
             <span className='md:hidden'><Cart name = {0}/></span>
@@ -148,7 +168,7 @@ export default function Header(){
           </div>
       </motion.div>}
       {isearching && <div className='fixed w-full bg-gray-100 z-50 -ml-4 px-4'>
-            <ul className=''>
+            <ul>
               {SearchList}
             </ul>
         </div>}
