@@ -30,9 +30,14 @@ class Product(models.Model):
     uploaded = models.DateTimeField(auto_now_add=True)   
     affiliate = models.ForeignKey(Store,on_delete=models.SET_NULL,null = True,related_name="product")
     category = models.ForeignKey(Category,on_delete=models.SET_NULL,null = True,related_name="products") 
+    discount = models.IntegerField(null = True,blank = True)
+    wishlist = models.ManyToManyField(User,related_name="wishlist")
+    
 
     def __str__(self):
         return self.name
+    class Meta:
+        ordering = ("-uploaded",)
 
 class Review(models.Model):
     rating = models.PositiveIntegerField(validators = [MinValueValidator(1),MaxValueValidator(5)])

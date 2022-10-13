@@ -99,15 +99,15 @@ export default function Header(){
           </div>
     )
   }
-  // useEffect(()=>{
-  //   setTimeout(()=>{
-  //     if(count<4){
-  //       setcount((prev=>prev + 1))
-  //     }
-  //     else(setcount(0))
-  //   },5000
-  // )
-  // },[count])
+  useEffect(()=>{
+    setTimeout(()=>{
+      if(count<4){
+        setcount((prev=>prev + 1))
+      }
+      else(setcount(0))
+    },5000
+  )
+  },[count])
 
   return(
     <section className='container'>
@@ -192,7 +192,7 @@ export default function Header(){
                Featured Products</h1>
             </div>
             {loaded &&  <div className=' w-full px-6 md:px-10 lg:px-16 rounded-xl'>
-              <Sliders url={curImage[count].url} label={curImage[count].label}/>
+              <Sliders url={curImage[count].url} label={curImage[count].name} item={curImage[count]}/>
             </div>}
           </div>
         </div>

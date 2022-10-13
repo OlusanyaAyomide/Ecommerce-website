@@ -23,20 +23,24 @@ export default function Main() {
   const catActive = useSelector((state=>state.category.active))
   const searchparam = useSelector((state=>state.search.params))
   const auth = useSelector((state=>state.auth))
-
-
-
-
-  // if (firstrender){window.localStorage.setItem("access",JSON.stringify("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTY3MzM3MTAzMywiaWF0IjoxNjY1NTk1MDMzLCJqdGkiOiI5MjFlZWU3ODQ4YWQ0YzE4ODE2ODg4YjIyYzhhODNhZiIsInVzZXJfaWQiOjF9.mD8yoqiK26Y-H53r5V3PE1okHPyk9tpqVS8ve9wkB20"))}
-  console.log(window.localStorage.getItem("access"))
+  const loginsatus = useSelector((state=>state.auth.loginstatus))
+  console.log(auth)
+  
+  console.log(loginsatus)
   useEffect(()=>{
     console.log("aliveeee")
     if (firstrender){
       firstrender=false
+      const time = 1000*4*60
       const token = JSON.parse(window.localStorage.getItem("access"))
       if (token !== null){
-        console.log(token)
           dispatch(InitiaTokenFetch(token))
+          const interval = setInterval(()=>{
+            console.log("alive")
+
+            dispatch(InitiaTokenFetch(auth.token.refresh))
+          },300000)
+     
       }
   }
   },[])
@@ -68,7 +72,9 @@ export default function Main() {
             <Route path='/search' element={
               searchparam?<Search/>:(<Navigate replace to="/"/>)}>
             </Route>
-            <Route path='/login' element={<Login/>}></Route>
+            <Route path='/login' element={
+            loginsatus !== 200? <Login/>:(<Navigate replace to="/"/>)}>
+            </Route>
           </Routes>
     </BrowserRouter>
   )

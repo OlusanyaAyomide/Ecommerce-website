@@ -1,11 +1,33 @@
 import React from 'react'
+import { useSelector,useDispatch } from 'react-redux'
+import { useState,useEffect } from 'react'
+import { LoginFetch } from '../store/datafetch'
+import { useNavigate } from 'react-router-dom'
 
 export default function Login() {
+    const token = useSelector((state=>state.auth.token.access))
+    const error= useSelector((state=>state.auth.loginerr))
+    console.log(error)
+    const navigate = useNavigate()
+    let first = true
+    useEffect(()=>{
+        if (first){
+            first=false
+            return}
+            if (token){
+                navigate("/")
+            }
+    },[token,error])
+
+    const dispatch = useDispatch()
     function handleSubmit(event){
         event.preventDefault()
         const username = event.target.username.value
         const password = event.target.password.value
- 
+        console.log(username + " " + password)
+        if(username !== "" && password !== ""){
+            dispatch(LoginFetch(username,password))
+    }
     }
 
     return (
@@ -17,6 +39,7 @@ export default function Login() {
                 </h1>
                 <form className="mt-6" onSubmit={handleSubmit}>
                     <div className="mb-2">
+                        {error && <span className='text-red-500 font-semibold text-md'>{error}</span>}
                         <label
                             htmlFor="email"
                             className="block text-sm font-semibold text-gray-800"
@@ -26,6 +49,7 @@ export default function Login() {
                         <input
                             type="text"
                             name="username"
+                            autoComplete='current-password'
                             className="block w-full px-4 py-2 mt-2 text-[#5858ec]  bg-white border rounded-md focus:border-[#5858ec]/40 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
                         />
                     </div>
@@ -39,6 +63,7 @@ export default function Login() {
                         <input
                             type="password"
                             name="password"
+                            autoComplete='current-username'
                             className="block w-full px-4 py-2 mt-2 text-[#5858ec]   bg-white border rounded-md focus:border-[#5858ec]/40 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
                         />
                     </div>

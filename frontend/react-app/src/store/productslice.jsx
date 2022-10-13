@@ -5,7 +5,7 @@ const ProductSlice = createSlice({
     initialState:{latest:[],featured:[],featureloaded:false,affiliate:[],search:{
         userinput:"",
         autopredict:[]
-    },allcategory:[],loaded:false},
+    },allcategory:[],loaded:false,page:1,total:"",topdeals:[]},
     reducers:{
         updateLatest(state,action){
             state.latest = action.payload
@@ -15,7 +15,11 @@ const ProductSlice = createSlice({
             state.featureloaded = true
         },
         updateaffiliate(state,action){
-            state.affiliate = action.payload
+            state.affiliate = action.payload.results
+            state.total = Math.ceil(action.payload.count/5)
+            console.log(state.affiliate)
+            console.log(state.total)
+            // state.affiliate=action.payload
         },
         updateinput(state,action){
             state.search.userinput=action.payload
@@ -26,7 +30,16 @@ const ProductSlice = createSlice({
         updateallcategory(state,action){
             state.allcategory = action.payload
             state.loaded= true
-        },        
+        },
+        setnewpage(state,action){
+            if (action.payload === true){
+                state.page +=1
+            }
+            else(state.page -=1)
+        },
+        updatetopdeals(state,action){
+            state.topdeals=action.payload
+        }
     }
 })
 

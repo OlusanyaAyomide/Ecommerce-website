@@ -20,7 +20,7 @@ export default function Caetegory() {
     <section className="container py-3 bg-gradient-to-r from-slate-200 to-[#5858ec]/10 overflow-auto">
         <div className='flex py-1 bg-white overflow-auto -mx-4 px-4 shadow-lg items-center md:justify-center'>
             {FilterList}
-        </div>    
+        </div>   
     </section>
   )
 }

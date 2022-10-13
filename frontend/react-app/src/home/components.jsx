@@ -4,7 +4,7 @@ import { Featured } from './xanimation'
 import {useSelector} from 'react-redux'
 import { Link } from 'react-router-dom'
 
-export function Cart(props) {
+export function Cart() {
   const counts = useSelector((state=>state.cart.quantity))
   return (
     <Link to="/cart"><span className='inline-block fa fa-shopping-cart relative text-3xl ml-1'> 
@@ -12,14 +12,15 @@ export function Cart(props) {
     </span></Link>
   )
 }
+
 export function Sliders(props){
   return(
-    <motion.div className="w-full h-[200px] rounded-xl overflow-hidden relative dark-cover before:bg-black/10  bg-gradient-to-r to-slate-200 from-white" variants={Featured} initial="initial" animate="animate">
+    <Link to="/detail" state={{from:props.item}}><motion.div  className="w-full h-[200px] rounded-xl overflow-hidden relative dark-cover before:bg-black/10  bg-gradient-to-r to-slate-200 from-white" variants={Featured} initial="initial" animate="animate">
       <div>
-      <img src={props.url} alt="image" className={`${props.type === "category"?"full-image":"cover-image"} h-[200px]`} />
+     <img src={props.url} alt="image" className={`${props.type === "category"?"full-image":"cover-image"} h-[200px]`} />
       </div>
       <span className='absolute bottom-4 left-2 text-gray-900 text-[21px] md:text-2xl lg:text-3xl bg-white/70 px-2 rounded-lg font-semibold'>{props.label}</span>
-    </motion.div>
+    </motion.div></Link> 
   )
 }
 
@@ -202,6 +203,7 @@ export function getExactPrice(value,discount){
 }
 
 export function ProductList(prop){
+  // 
   return(
     <div className=" w-6/12 md:w-4/12 lg:w-3/12 mb-3 ">
     <div className=' '>
