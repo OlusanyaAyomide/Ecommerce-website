@@ -18,8 +18,8 @@ export default function Review() {
         <div key={key} className="w-full md:w-6/12 lg:w-4/12 pb-2">
             <div className='pb-2'><DetailStar rating={item.rating}/></div>
             <h1 className='font-semibold'>{item.title}</h1>
-            <h1>{item.content}</h1>
-            <h1 className='text-gray-700 text-sm'>{item.time} <span className='mx-2'>by</span>{item.name}</h1>
+            <h1>{item.comment}</h1>
+            <h1 className='text-gray-700 text-sm'>{item.time} <span className='mx-2'>by</span>{item.customer}</h1>
         </div>
       )
     })

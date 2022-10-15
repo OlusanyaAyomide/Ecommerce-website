@@ -42,10 +42,10 @@ export default function Feedback() {
         </div>}
         <div className="row">
         <div className='w-full md:w-4/12 lg:w-3/12 bg-slate-300 md:py-2 hidden md:block'>
-                <div className='bg-white container'>
+                <div className='bg-white container md:h-[333px]'>
                     <StoreDetail name={AffStores.name} count={AffStores.ProductCount} category={AffStores.Category}/>
                     <h1 className='font-semibold'>Product Description</h1>
-                    <p>{product.description}</p>
+                    <p>{product.desciption}</p>
                 </div>
             </div>
             <div className='w-full md:w-8/12 lg:w-9/12 bg-slate-300 py-2'>

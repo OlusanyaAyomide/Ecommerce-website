@@ -3,7 +3,7 @@ import  Header  from './home/Header'
 import Caetegory from './home/caetegory'
 import Latests from './home/latest'
 import Affiliate from './home/Affiliate'
-import { Latestfetch,AffiliateFetch,AutoPredictFetch,FeaturedFetch,CategoryFetch, TopproductFetch } from '../store/datafetch'
+import { Latestfetch,AffiliateFetch,AutoPredictFetch,FeaturedFetch,CategoryFetch, TopproductFetch,MostratedFetch } from '../store/datafetch'
 import { useSelector,useDispatch } from 'react-redux'
 import { detailaction } from '../store/detailslice'
 import {categoryactions} from "../store/categoryslice"
@@ -27,6 +27,10 @@ export function Home() {
   useEffect(()=>{
     dispatch(TopproductFetch())
   },[])
+  useEffect(()=>{
+    dispatch(MostratedFetch()
+    ) 
+  })
 
   useEffect(()=>{
     dispatch(FeaturedFetch())

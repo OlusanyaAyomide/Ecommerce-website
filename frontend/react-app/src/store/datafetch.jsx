@@ -6,7 +6,7 @@ import { detailaction } from './detailslice'
 import { Cartaction } from './cartslice'
 import { searchaction } from './searchslice'
 import { authActions } from './authslice'
-import { useSelector } from 'react-redux'
+
 
 
 const host = "http://127.0.0.1:8000"
@@ -30,9 +30,7 @@ export function Latestfetch() {
     }
 }
 export function AffiliateFetch(prop){
-    console.log(prop)
     let status;
-    console.log("hereee")
     return async(dispatch)=>{
         async function FetchApi(){
             const res =await fetch(`${host}/store?page=${prop}`)
@@ -43,7 +41,6 @@ export function AffiliateFetch(prop){
         try{
             const response = await FetchApi()
             if (status === 200){
-                console.log(response)
                 return dispatch(Productactions.updateaffiliate(response))
             }
         }
@@ -70,6 +67,25 @@ export function TopproductFetch(prop){
         catch{}
     }
 }
+export function MostratedFetch(){
+    let status = 0
+    return async(dispatch)=>{
+        async function FetchApi(){
+            const res = await fetch(`${host}/rated`)
+            status = res.status
+            const data = res.json()
+            return data
+        }
+        try{
+            const response = await FetchApi()
+            if(status  === 200){
+                dispatch(Productactions.updatemostrated(response))
+            }
+        }
+        catch{}
+    }
+}
+
 
 export function AutoPredictFetch(prop){
     return async(dispatch)=>{
@@ -105,8 +121,7 @@ export function CategoryFetch(){
             const data = await FetchApi()
             return dispatch(Productactions.updateallcategory(data))
         }
-        catch{}
-   
+        catch{}   
     }
 }
 
@@ -121,32 +136,82 @@ export function AllcategoryStoreFetch(){
     }
 }
 export function DetailFetch(prop){
-    console.log(prop)
+    let status = 200
+    const anonymous = window.localStorage.getItem("anonymous")
     return async(dispatch)=>{
-        if(prop <4){
-             return dispatch(detailaction.setproduct(ProductDetailDemo))}
-        if(prop >=3 && prop < 7 ){
-            return dispatch(detailaction.setproduct(ProductDetailDemo2))}
-        if(prop >=7){
-             return dispatch(detailaction.setproduct(ProductDetailDemo3))}
-    
+            async function FetchApi(){
+                const res = await fetch(`${host}/detail/${prop}/${anonymous}`)
+                status = res.status
+                const data = await res.json()
+                return data
+            }
+            try{
+                const response = await FetchApi()
+                if (status === 200){
+                    dispatch(detailaction.setproduct(response))
+                }
+            }
+            catch{}
     }
 }
 export function SimilarFetch(prop){
+    let status
     return async(dispatch)=>{ 
-        return dispatch(detailaction.setsimilarproduct(SimilarProduct))
+        async function FetchApi(){
+            const res = await fetch(`${host}/similar/${prop}`)
+            status = res.status
+            const data = await res.json()
+            return data
+        }
+        try{
+            const response = await FetchApi()
+            if (status === 200){
+                dispatch(detailaction.setsimilarproduct(response))
+            }
+        }
+        catch{}
     }
 }
 export function RecentFetch(){
+    const key = window.localStorage.getItem("anonymous")
+    let status = 0
+    console.log(key)
     return async(dispatch)=>{
-        return dispatch(Cartaction.setrecent(LatestDemo))
+        async function FetchApi(){
+            const res = await fetch(`${host}/recent/${key}`)
+            status = res.status
+            const data = await res.json()
+            return data
+        }
+        try{
+            const response = await FetchApi()
+            if (status === 200){
+                return dispatch(Cartaction.setrecent(response))
+            }
+        }
+        catch{}
+         // return dispatch(Cartaction.setrecent(LatestDemo))
     }
 }
 
 export function SearchFetch(prop){
     console.log(prop)
+    let status;
     return async(dispatch)=>{
-        return dispatch(searchaction.updatesearch(LatestDemo))
+        async function FetchApi(){
+            const res = await fetch(`${host}/search?param=${prop}`)
+            status = res.status
+            const data = await res.json()
+            return data
+        }
+        try{
+            const response = await FetchApi()
+            if(status === 200){
+                return dispatch(searchaction.updatesearch(response))
+        }
+        }
+        catch(err){console.log(err)}
+        // return dispatch(searchaction.updatesearch(LatestDemo))
     }
 }
 

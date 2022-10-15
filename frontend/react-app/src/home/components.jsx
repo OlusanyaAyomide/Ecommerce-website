@@ -232,14 +232,13 @@ export function ProductList(prop){
 
 export function TopDealsCom(props){
   return(
-    <div className='mx-2 '>
+    <Link to="/detail" state={{from:props.item}}><div className='mx-2 '>
         <div className='h-24 w-24 rounded-xl overflow-hidden'>
-            <a href="#"><img src={props.image} alt="image" className='full-image'/></a>
+          <img src={props.image} alt="image" className='full-image'/>
         </div>
         <h3 className='text-[12px] font-semibold text-center'>{props.name}</h3>
         <h3 className='text-[12px] font-semibold text-center mt-2'>₦{props.price}</h3>
-    </div>
-   
+    </div></Link>   
 )
 }
 export function AffiliateHeader(prop){

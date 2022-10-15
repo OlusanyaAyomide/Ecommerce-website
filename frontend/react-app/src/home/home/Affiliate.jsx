@@ -11,7 +11,10 @@ export default function Affiliate() {
     const Stores=useSelector((state=>state.product.affiliate))
     const pagenumber = useSelector((state=>state.product.page))
     const lastpage = useSelector((state=>state.product.total))
+    const TopListDemo = useSelector((state=>state.product.topdeals))
+    const Mostrated = useSelector((state=>state.product.mostrated))
     const dispatch = useDispatch()
+    
     function handlepagination(prop){
         if(!prop && pagenumber > 1){
             dispatch(Productactions.setnewpage(prop))
@@ -21,22 +24,21 @@ export default function Affiliate() {
         }
     }
     const StoreList = Stores.map((items,key)=>{
-        console.log(items)
         return(
             <div key = {key}>
                 {key == 2 && <div>
                 <AffiliateHeader label ="Top Deals For You"/>
-                <div className='flex py-1 bg-white overflow-auto -mx-4 px-4 shadow-lg items-center md:justify-center mt-2'>
-                    {TopListtDemo.map((item,key3)=>{
-                   return( <TopDealsCom key ={key3} image ={item.url} name ={item.name} price = {item.price}/>)
+                <div className='flex py-1 bg-white overflow-auto -mx-4 px-4 shadow-lg  mt-2'>
+                    {TopListDemo.map((item,key3)=>{
+                   return( <TopDealsCom key ={key3} image ={item.url} name ={item.name} price = {item.price} item={item}/>)
                 })}
                 </div>
-                    </div>}
+                    </div>} 
                 {key == 3 && <div>
                 <AffiliateHeader label ="Check out our most rated products"/>
-                <div className='flex py-1 bg-white overflow-auto -mx-4 px-4 shadow-lg items-center md:justify-center mt-2'>
-                    {TopListtDemo.map((item,key3)=>{
-                   return( <TopDealsCom key ={key3} image ={item.url} name ={item.name} price = {item.price}/>)
+                <div className='flex py-1 bg-white overflow-auto -mx-4 px-4 shadow-lg items-center  mt-2'>
+                    {Mostrated.map((item,key3)=>{
+                   return( <TopDealsCom key ={key3} image ={item.url} name ={item.name} price = {item.price} item={item}/>)
                 })}
                 </div>
                     </div>}
@@ -44,7 +46,7 @@ export default function Affiliate() {
                 <div className='row bg-white container'>
                 {items.product.map((item,key2)=>{
                     return(
-                          <ProductList name = {item.name} reviews = {item.reviews} url = {item.url} totalR = {item.totalR} price ={item.price} store ={item.store} key ={key2} items={item} discount={item.discount}/>
+                        <ProductList name = {item.name} reviews = {item.reviews} url = {item.url} totalR = {item.totalR} price ={item.price} store ={item.store} key ={key2} items={item} discount={item.discount}/>
                     )
                 })}
                 </div>

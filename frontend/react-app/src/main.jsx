@@ -24,21 +24,23 @@ export default function Main() {
   const searchparam = useSelector((state=>state.search.params))
   const auth = useSelector((state=>state.auth))
   const loginsatus = useSelector((state=>state.auth.loginstatus))
-  console.log(auth)
   
-  console.log(loginsatus)
+  const anonymous = window.localStorage.getItem("anonymous")
+  if (anonymous === null){
+    let r = (Math.random() + 1).toString(36).substring(7)
+    window.localStorage.setItem("anonymous",r)
+  }
+  console.log(window.localStorage.getItem("anonymous"))
   useEffect(()=>{
-    console.log("aliveeee")
     if (firstrender){
       firstrender=false
-      const time = 1000*4*60
       const token = JSON.parse(window.localStorage.getItem("access"))
       if (token !== null){
           dispatch(InitiaTokenFetch(token))
           const interval = setInterval(()=>{
             console.log("alive")
-
-            dispatch(InitiaTokenFetch(auth.token.refresh))
+            const token = JSON.parse(window.localStorage.getItem("access"))
+            dispatch(InitiaTokenFetch(token))
           },300000)
      
       }
