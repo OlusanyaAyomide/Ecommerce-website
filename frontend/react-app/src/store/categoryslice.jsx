@@ -7,7 +7,8 @@ const categoryslice = createSlice({
         allcategories:[],
         trending:[],
         allstores:[],
-        active:false
+        active:false,
+        currentid:0,
     },
     reducers:{
         updatename(state,action){
@@ -31,7 +32,12 @@ const categoryslice = createSlice({
         },
         setasactive(state){
             state.active = true
+        },
+        setCategoryID(state,action){
+            console.log(action.payload)
+            state.currentid=action.payload
         }
+        
     }
 })
 export const categoryactions = categoryslice.actions

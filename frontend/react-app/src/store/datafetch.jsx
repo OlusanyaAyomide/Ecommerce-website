@@ -118,8 +118,9 @@ export function CategoryFetch(){
             return data
         }
         try{
-            const data = await FetchApi()
-            return dispatch(Productactions.updateallcategory(data))
+            const response = await FetchApi()
+            console.log(response)
+            return dispatch(Productactions.updateallcategory(response))
         }
         catch{}   
     }
@@ -135,6 +136,41 @@ export function AllcategoryStoreFetch(){
         return dispatch(categoryactions.updateallstores(LatestDemo))
     }
 }
+
+export function categoryDetailFetch(prop){
+    let status
+    return async(dispatch)=>{
+        async function FetchApi(){
+            const res = await fetch(`${host}/category/${prop}`) 
+            status = res.status
+            const data = await res.json()
+            return data
+        }
+        try{
+            const response = await FetchApi()
+            return dispatch(categoryactions.updateallstores(response))
+        }
+        catch(err){console.log(err)}
+    }
+}
+
+export function CategoryHeaderFetch(prop){
+    let status
+    return async(dispatch)=>{
+        async function FetchApi(){
+            const res = await fetch(`${host}/categoryheader/${prop}`) 
+            status = res.status
+            const data = await res.json()
+            return data
+        }
+        try{
+            const response = await FetchApi()
+            return dispatch(categoryactions.updatename(response))
+        }
+        catch(err){console.log(err)}
+    }
+}
+
 export function DetailFetch(prop){
     let status = 200
     const anonymous = window.localStorage.getItem("anonymous")

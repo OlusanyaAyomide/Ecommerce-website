@@ -4,23 +4,33 @@ import { useLocation } from 'react-router-dom'
 import { categoryactions } from '../store/categoryslice'
 import { useDispatch,useSelector } from 'react-redux'
 import Trending from './category/Trending'
-import { TrendingFetch,AllcategoryStoreFetch } from '../store/datafetch'
+import { TrendingFetch,AllcategoryStoreFetch,categoryDetailFetch,CategoryHeaderFetch } from '../store/datafetch'
 import Allcategory from './category/Allcategory'
 export default function Category() {
-    // const allcategories = useSelector((s))
-    const location = useLocation()
-    const {from} = location.state
-    const {all} = location.state
     const dispatch = useDispatch()
+    // const allcategories = useSelector((s))
+    // const location = useLocation()
+    // const {from} = location.state
+    // const {all} = location.state
+    
+    // useEffect(()=>{
+    //     dispatch(categoryactions.updatename(from))  
+    // },[])
+    // useEffect(()=>{
+    //     dispatch(categoryactions.changecategory(all))
+    // },[])
+    const currentId = useSelector((state=>state.category.currentid))
     useEffect(()=>{
-        dispatch(categoryactions.updatename(from))  
-    },[])
+      dispatch(categoryDetailFetch(currentId))
+    },[currentId])
     useEffect(()=>{
-        dispatch(categoryactions.changecategory(all))
-    },[])
-    useEffect(()=>{
-      dispatch(TrendingFetch(from))
+      dispatch(TrendingFetch(currentId))
     })
+
+    useEffect(()=>{
+      dispatch(CategoryHeaderFetch(currentId))
+    },[currentId])
+
     useEffect(()=>{
       dispatch(AllcategoryStoreFetch())
     },[])

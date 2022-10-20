@@ -12,7 +12,7 @@ class Category(models.Model):
     image = CloudinaryField("image")
 
     def __str__(self):
-        return f"{self.name} Category"
+        return f"{self.name} Category| {self.id}"
 
 class Store(models.Model):
     name = models.CharField(max_length = 100)

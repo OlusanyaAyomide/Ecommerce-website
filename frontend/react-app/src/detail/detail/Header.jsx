@@ -10,6 +10,7 @@ import { Productactions } from '../../store/productslice.jsx'
 import { Link } from 'react-router-dom'
 import { searchaction } from '../../store/searchslice.jsx'
 import { useNavigate } from 'react-router-dom'
+import { categoryactions } from '../../store/categoryslice.jsx'
 
 
 
@@ -26,9 +27,14 @@ export default function Header(){
   const navigate=useNavigate()
   const [params,setparams] =useState("")
 
+  function setCategoryID(id){
+    dispatch(categoryactions.setCategoryID(id))
+    console.log(id)
+    navigate("/category")
+  }
   const CategoryItems = CategoryList.map((items,key)=>{
     return(
-      <Link state={{from:items,all:CategoryList}} to={'/category'}  key ={key }><li className='py-1 hover:before:bg-black/20  dark-cover relative before:animate-all rounded-sm overflow-hidden before:duration-300 text-gray-900'>{items.name}</li></Link>
+      <button className='block' key={key} onClick={()=>setCategoryID(items.id)}><li className='py-1 hover:before:bg-black/20  dark-cover relative before:animate-all rounded-sm overflow-hidden before:duration-300 text-gray-900'>{items.name}</li></button>
     )
   })
   function Autocomplete(value){

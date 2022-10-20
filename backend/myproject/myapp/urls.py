@@ -12,5 +12,7 @@ urlpatterns = [
     path("detail/<int:pk>/<str:key>",views.productDetailAV.as_view(),name="detail"),
     path("similar/<int:pk>",views.SimilarGV.as_view(),name="similar"),
     path("recent/<str:key>",views.RecentlyViewed.as_view(),name="recently-viewed"),
-    path("search",views.SearchProductGV.as_view(),name="search")
+    path("search",views.SearchProductGV.as_view(),name="search"),
+    path("category/<int:pk>",views.CategoryGV.as_view(),name="category"),
+    path("categoryheader/<int:pk>",views.CategoryheaderGV.as_view(),name="catheader")
 ]

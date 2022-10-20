@@ -18,13 +18,13 @@ export default function Header(){
   const[toggle,setToggle] = useState(false)
   const[drop,setdrop] = useState(false)
   const [admin,setadmin] = useState(false)
-  const [CategoryList,setCategoryList] = useState(categories)
   const [isearching,setisSearching] = useState()
   const [scrolref,scrolling] = useInView()
   const dispatch = useDispatch()
   const CategoryInfo = useSelector((state=>state.category.name))
   const navigate=useNavigate()
   const [params,setparams] =useState("")
+  const CategoryList = useSelector((state=>state.product.allcategory))
 
 
   const Searchresult= useSelector((state=>state.product.search.autopredict))
@@ -32,10 +32,13 @@ export default function Header(){
     dispatch(categoryactions.findcategory(e.target.innerHTML))
     setToggle(false)
   }
-
+  function setCategoryID(id){
+        setToggle(false)
+    dispatch(categoryactions.setCategoryID(id))
+  }
   const CategoryItems = CategoryList.map((items,key)=>{
     return(
-        <li className='py-1 hover:before:bg-black/20  dark-cover relative before:animate-all rounded-sm overflow-hidden before:duration-300 text-gray-900' key ={key } name={items} onClick={handleChange}>{items.name}</li>
+      <button className='block' key={key} onClick={()=>setCategoryID(items.id)}><li className='py-1 hover:before:bg-black/20  dark-cover relative before:animate-all rounded-sm overflow-hidden before:duration-300 text-gray-900'>{items.name}</li></button>
     )
   })
   function Autocomplete(value){

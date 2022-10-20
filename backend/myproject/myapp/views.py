@@ -1,3 +1,4 @@
+from unicodedata import category
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework import generics
@@ -23,6 +24,7 @@ class LatestProductAV(APIView):
 class categoriesGV(generics.ListAPIView):
     queryset=Category.objects.all()
     serializer_class=CategorySerializer
+    
 
 class TopProducts(generics.ListAPIView):
     serializer_class=Productserializer
@@ -124,3 +126,16 @@ class SearchProductGV(APIView):
         products = Product.objects.filter(Q(name__icontains=param)|Q(affiliate__name__icontains = param)|Q(category__name__icontains = param))
         serializers= Productserializer(products,many=True)
         return Response(serializers.data)
+
+class CategoryGV(generics.ListAPIView):
+    serializer_class=Productserializer
+    def get_queryset(self):
+        lookup_fieid = self.kwargs["pk"]
+        category = Category.objects.get(pk=lookup_fieid)
+        product =Product.objects.filter(category=category)
+        return product
+    
+class CategoryheaderGV(generics.RetrieveAPIView):
+    lookup_field="pk"
+    serializer_class=CategorySerializer
+    queryset=Category.objects.all()

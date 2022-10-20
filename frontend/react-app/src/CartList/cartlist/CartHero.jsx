@@ -1,14 +1,20 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { useSelector,useDispatch } from 'react-redux'
+import { Link,useNavigate } from 'react-router-dom'
+import { categoryactions } from '../../store/categoryslice'
 import { logo } from '../../assests'
 
-export default function CatHero() {
+export default function Hero() {
   const CategoryList = useSelector((state=>state.product.allcategory))
-
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  function setCategoryID(id){
+    dispatch(categoryactions.setCategoryID(id))
+    navigate("/category")
+  }
   const CategoryItems = CategoryList.map((items,key)=>{
     return(
-      <Link state={{from:items,all:CategoryList}} to={'/category'}  key ={key }><li className='py-1 hover:before:bg-black/20  dark-cover relative before:animate-all rounded-sm overflow-hidden before:duration-300 text-gray-900'>{items.name}</li></Link>
+      <button className='block' key={key} onClick={()=>setCategoryID(items.id)}><li className='py-1 hover:before:bg-black/20  dark-cover relative before:animate-all rounded-sm overflow-hidden before:duration-300 text-gray-900'>{items.name}</li></button>
     )
   })
   return (

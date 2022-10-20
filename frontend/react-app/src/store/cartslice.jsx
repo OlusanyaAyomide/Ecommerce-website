@@ -88,7 +88,6 @@ export const cartSlice = createSlice({
     },
     removeproduct(state,action){
         const product = action.payload.product
-        console.log(product)
         const newList =[]
         const count = state.repeated[`product${product.id}`].count
         const price = state.repeated[`product${product.id}`].price
