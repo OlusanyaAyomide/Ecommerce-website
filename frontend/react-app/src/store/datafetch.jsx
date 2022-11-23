@@ -88,8 +88,23 @@ export function MostratedFetch(){
 
 
 export function AutoPredictFetch(prop){
+    // console.log(prop)
+    // return async(dispatch)=>{
+    //     return dispatch(Productactions.updateautopredict(Searchresults))
+    // }
+    let status;
     return async(dispatch)=>{
-        return dispatch(Productactions.updateautopredict(Searchresults))
+        async function FetchApi(){
+            const res = await fetch(`${host}/predict?param=${prop}`)
+            status = res.status
+            const data =await res.json()
+            return data
+        }
+        try{
+            const data = await FetchApi()
+            return dispatch(Productactions.updateautopredict(data))
+        }
+        catch{}
     }
 }
 export function FeaturedFetch(){
@@ -119,7 +134,6 @@ export function CategoryFetch(){
         }
         try{
             const response = await FetchApi()
-            console.log(response)
             return dispatch(Productactions.updateallcategory(response))
         }
         catch{}   
@@ -127,14 +141,32 @@ export function CategoryFetch(){
 }
 
 export function TrendingFetch(prop){
+    let status = 200
     return async(dispatch)=>{
-        return dispatch(categoryactions.updatetrending(TopListtDemo))
+            async function FetchApi(){
+            const res = await fetch(`${host}/catrending/${prop}`)
+            status = res.status
+            const data = await res.json()
+            return data
+        }
+        try{
+            if (status == 200){
+                const data = await FetchApi()
+                if (status == 200){
+                    return dispatch(categoryactions.updatetrending(data))
+                }
+            }
+        }
+        catch(err){
+            console.log(err)
+        }
+        // return dispatch(categoryactions.updatetrending(TopListtDemo))
     }
 }
 export function AllcategoryStoreFetch(){
-    return async(dispatch)=>{
-        return dispatch(categoryactions.updateallstores(LatestDemo))
-    }
+        return async (dispatch)=>{
+            return dispatch(categoryactions.updateallstores(LatestDemo))
+        }
 }
 
 export function categoryDetailFetch(prop){
@@ -184,7 +216,7 @@ export function DetailFetch(prop){
             try{
                 const response = await FetchApi()
                 if (status === 200){
-                    dispatch(detailaction.setproduct(response))
+                    dispatch(detailaction.setproduct(response)) 
                 }
             }
             catch{}
@@ -277,7 +309,7 @@ export function InitiaTokenFetch(token){
 }
 export function LoginFetch(username,password){
     let status=0
-    console.log()
+    console.log(username,password)
     return async(dispatch)=>{
         async function login(){
             const res = await fetch(`${host}/auth/api/token`,{
@@ -302,6 +334,110 @@ export function LoginFetch(username,password){
                 dispatch(authActions.seterror(response))
             )
         }
-        catch{console.log("err")}
+        catch(err){console.log(err)}
+    }
+}
+
+export function CheckoutCart(products,token){
+    let status = 0
+    return async(dispatch)=>{
+        async function FetchApi(){
+            const res = await fetch(`${host}/checkout`,{
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body:JSON.stringify(products)
+            })
+            const data = await res.json()
+            status = res.status
+            return data
+        }
+        try{
+            const response = await FetchApi()
+            console.log(response)
+            if (status == 200){
+                console.log("dispatching......")
+                dispatch(Cartaction.resetCart())
+                dispatch(Cartaction.setSendToServer(false))
+            }
+        }
+        catch(err){console.log(err)}
+    }
+}
+
+export function Userinfo(token){
+    let status = 0
+    return async(dispatch)=>{
+        async function FetchApi(){
+            const res = await fetch(`${host}/profile`,{
+                method : "POST",
+                headers:{
+                    "Content-Type":"application/json",
+                    "Authorization": `Bearer ${token}`}
+            }) 
+            status = res.status
+            const data = await res.json()
+            return data
+        }
+        try{
+            const response = await FetchApi()
+            if (status == 200){
+                console.log(response)
+               dispatch(authActions.setuserinfo(response))
+            }
+        }
+        catch(err){console.log(err)}   
+    }
+}
+
+export function WishListAdd(productid,token){
+    let status = 0;
+    return async(dispatch)=>{
+        async function FetchApi(){
+            const res = await fetch(`${host}/wishlist/${productid}`,{
+                method : "POST",
+                headers:{
+                    "Content-Type":"application/json",
+                    "Authorization": `Bearer ${token}`}
+            }) 
+            status = res.status
+            const data = await res.json()
+            return data
+        }
+        try{
+            const response = await FetchApi()
+
+            if(status ==200){
+                dispatch(authActions.setuserinfo(response))
+            }
+        }
+        catch(err){console.log(err)}
+    }
+}
+
+export function WishListRemove(productid,token){
+    let status = 0;
+    return async(dispatch)=>{
+        async function FetchApi(){
+            const res = await fetch(`${host}/wishlistremove/${productid}`,{
+                method : "POST",
+                headers:{
+                    "Content-Type":"application/json",
+                    "Authorization": `Bearer ${token}`}
+            }) 
+            status = res.status
+            const data = await res.json()
+            return data
+        }
+        try{
+            const response = await FetchApi()
+
+            if(status ==200){
+                dispatch(authActions.setuserinfo(response))
+            }
+        }
+        catch(err){console.log(err)}
     }
 }

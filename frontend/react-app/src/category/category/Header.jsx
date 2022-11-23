@@ -83,7 +83,7 @@ export default function Header(){
   function SearchDiv(e){
     setisSearching(true)
     setToggle(false)
-    dispatch(Productactions.updateinput(e.target.value))
+    dispatch(searchaction.updatepredicter(e.target.value))
 
 
   }

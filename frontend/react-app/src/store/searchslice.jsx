@@ -5,7 +5,8 @@ export const SearchSlice=createSlice({
     initialState:{
         params:null,
         searchlist:[],
-        loaded:false
+        loaded:false,
+        predict:""
     },
     reducers:{
         updateparams(state,action){
@@ -19,6 +20,9 @@ export const SearchSlice=createSlice({
         },
         updatestatus(state){
             state.loaded=false
+        },
+        updatepredicter(state,action){
+            state.predict = action.payload
         }
 
     }

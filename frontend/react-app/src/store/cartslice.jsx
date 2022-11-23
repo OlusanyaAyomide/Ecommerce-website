@@ -8,7 +8,8 @@ export const cartSlice = createSlice({
         repeated:{},
         price:0,
         recent:[],
-        loaded:false
+        loaded:false,
+        sendToServer:false,
     },
     reducers:{
         addproduct(state,action){
@@ -92,8 +93,6 @@ export const cartSlice = createSlice({
         const count = state.repeated[`product${product.id}`].count
         const price = state.repeated[`product${product.id}`].price
         const intprice = Number(product.price.replace(",",""))
-        console.log(product.price)
-        console.log(price)
         for (let item of state.productlist){
             if (item.id !== product.id){
                 newList.push(item)
@@ -111,7 +110,17 @@ export const cartSlice = createSlice({
         state.recent = action.payload
         state.loaded=true
     },
+    setSendToServer(state,action){
+        state.sendToServer = action.payload
+    },
+    resetCart(state){
+        state.productlist=[]
+        state.repeated = {}
+        state.quantity = 0
+        state.price = 0
     }
+    },
     
+  
 }) 
 export const Cartaction = cartSlice.actions

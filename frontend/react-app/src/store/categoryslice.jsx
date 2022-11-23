@@ -34,7 +34,6 @@ const categoryslice = createSlice({
             state.active = true
         },
         setCategoryID(state,action){
-            console.log(action.payload)
             state.currentid=action.payload
         }
         

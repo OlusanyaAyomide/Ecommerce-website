@@ -665,3 +665,17 @@ export const SimilarProduct= [{
    "discount":22,
 },
 ]
+
+const purchasedDemo={
+   
+}
+export const Tester = {
+   "id":7,
+   "url":camera,
+   "name":":Cyan Fancy Trouser",
+   "reviews":4.2,
+   "totalR":15,
+   "store":24,
+   "price":"105,500",
+   "discount":16
+}

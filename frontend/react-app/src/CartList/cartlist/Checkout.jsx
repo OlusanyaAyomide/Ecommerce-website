@@ -16,6 +16,7 @@ export default function Checkout() {
     const [remove,setremove] = useState(false)
     const [checkedout,setcheckedout] = useState(false)
 
+
     function handlepayment(){
       const paystack = new PaystackPop()
       const amount = products.price + (products.quantity * 240) + (products.price * 0.05 )
@@ -26,10 +27,18 @@ export default function Checkout() {
       firstname:"Olusanya",
       lastname:"Ayomide",
       onSuccess(transaction){
+        dispatch(Cartaction.setSendToServer(true))
         console.log( `payment complete refrence id: ${transaction.reference}`)
+       
       },
       onCancel(){console.log("Transactiion Cancelled")}
   })
+    }
+    function getDetail(prop){
+      const params= `product${prop}`
+      const quantity = products.repeated[params].count
+      return quantity
+     
     }
 
     function removeproduct(prop){
@@ -38,7 +47,7 @@ export default function Checkout() {
       setTimeout(()=>{
           setremove(false)
       },2000)
-      console.log(products)
+
     }
     function Remove(prop){
       return(
@@ -51,14 +60,14 @@ export default function Checkout() {
     }
     
     function increaseCart(item){
-      dispatch(Cartaction.addproduct({product:item}))
-      setpopout(true)
-      setcheckedout(false)
-      console.log(popout)
-      setTimeout(()=>{
-        setpopout(false)
-      },2000)
-      console.log(products)
+      if(getDetail(item.id) <5){
+        dispatch(Cartaction.addproduct({product:item}))
+        setpopout(true)
+        setcheckedout(false)
+        setTimeout(()=>{
+          setpopout(false)
+        },2000)
+      }
     }
     function decreaseCart(item){
       dispatch(Cartaction.reduceproduct({product:item}))
@@ -67,13 +76,6 @@ export default function Checkout() {
       setTimeout(()=>{
           setremove(false)
       },2000)
-      console.log(products)
-    }
-    function getDetail(prop){
-      const params= `product${prop}`
-      const quantity = products.repeated[params].count
-      return quantity.toLocaleString("en-Us")
-     
     }
     function Buttons(prop){
       let item = prop.item
@@ -134,7 +136,6 @@ export default function Checkout() {
                 <div>
                   {CartItems}
                 </div>
-                
             </div>
             <div className='md:w-4/12 lg:w-3/12 bg-slate-300 md:pt-1 md:pb-2 w-full px-2 md:pl-0 md:h-full'>
               {!checkedout && <div className='md:bg-white md:py-6 rounded-xl md:px-2 '>
@@ -159,7 +160,11 @@ export default function Checkout() {
                       <span className='font-semibold text-lg'>₦{(products.price * 0.05).toLocaleString()}</span>
                     </div>
                     <div className='py-1 rounded-xl md:px-2 '>
-                 {products.quantity > 0 && <button className='bg-[#5858ec] w-full block font-semibod mt-10 text-xl text-white py-2 rounded-md shadow-gray-700 shadow-md' onClick={handlepayment}>Pay Now (₦{(getTotal()).toLocaleString()})</button>}     
+                 {/* {products.quantity > 0 && <button className='bg-[#5858ec] w-full block font-semibod mt-10 text-xl text-white py-2 rounded-md shadow-gray-700 shadow-md' onClick={handlepayment}>Pay Now (₦{(getTotal()).toLocaleString()})</button>}  */}
+                 {products.quantity > 0 && <button className='bg-[#5858ec] w-full block font-semibod mt-10 text-xl text-white py-2 rounded-md shadow-gray-700 shadow-md' onClick={()=>{
+                  console.log("clicked")
+                    dispatch(Cartaction.setSendToServer(true))
+                 }}>Pay Now (₦{(getTotal()).toLocaleString()})</button>}
               </div>
                   </div> 
                 

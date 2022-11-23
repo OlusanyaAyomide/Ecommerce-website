@@ -30,7 +30,7 @@ export function Home() {
   useEffect(()=>{
     dispatch(MostratedFetch()
     ) 
-  })
+  },[])
 
   useEffect(()=>{
     dispatch(FeaturedFetch())

@@ -10,6 +10,7 @@ import { Productactions } from '../../store/productslice.jsx'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import { searchaction } from '../../store/searchslice.jsx'
+import { categoryactions } from '../../store/categoryslice.jsx'
 
 
 
@@ -19,7 +20,6 @@ export default function Header(){
   const[drop,setdrop] = useState(false)
   const [admin,setadmin] = useState(false)
   const [isearching,setisSearching] = useState()
-  const [count,setcount] = useState(0)
   const [scrolref,scrolling] = useInView()
   const dispatch=useDispatch()
   const CategoryList = useSelector((state=>state.product.allcategory))
@@ -27,14 +27,19 @@ export default function Header(){
   const navigate=useNavigate()
   const [params,setparams] =useState("")
 
-  const CategoryItems = CategoryList.map((items,key)=>{
-    return(
-      <Link state={{from:items,all:CategoryList}} to={'/category'}  key ={key }><li className='py-1 hover:before:bg-black/20  dark-cover relative before:animate-all rounded-sm overflow-hidden before:duration-300 text-gray-900'>{items.name}</li></Link>
-    )
-  })
+  function setCategoryID(id){
+    dispatch(categoryactions.setCategoryID(id))
+    navigate("/category")
+}
+const CategoryItems = CategoryList.map((items,key)=>{
+return(
+  <button className='block' key={key} onClick={()=>setCategoryID(items.id)}><li className='py-1 hover:before:bg-black/20  dark-cover relative before:animate-all rounded-sm overflow-hidden before:duration-300 text-gray-900'>{items.name}</li></button>
+)
+})
   function Autocomplete(value){
     console.log(value)
     dispatch(searchaction.updateparams(value))
+
   }
   const SearchList  = Searchresult.map((item,key)=>{
     return(
@@ -67,7 +72,7 @@ export default function Header(){
   function SearchDiv(e){
     setisSearching(true)
     setToggle(false)
-    dispatch(Productactions.updateinput(e.target.value))
+    dispatch(searchaction.updatepredicter(e.target.value))
 
 
   }

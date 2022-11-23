@@ -14,5 +14,12 @@ urlpatterns = [
     path("recent/<str:key>",views.RecentlyViewed.as_view(),name="recently-viewed"),
     path("search",views.SearchProductGV.as_view(),name="search"),
     path("category/<int:pk>",views.CategoryGV.as_view(),name="category"),
-    path("categoryheader/<int:pk>",views.CategoryheaderGV.as_view(),name="catheader")
+    path("categoryheader/<int:pk>",views.CategoryheaderGV.as_view(),name="catheader"),
+    path("predict",views.ProductpredictGV.as_view(),name="predictor"),
+    path("profile",views.userinfoAV.as_view(),name ="profile"),
+    path("catrending/<int:pk>",views.TrendingGV.as_view(),name="trending-category"),
+    path("checkout",views.CheckOutAV.as_view(),name="checkout"),
+    path("wishlist/<int:pk>",views.WishListAV.as_view(),name="wishlist"),
+    path("wishlistremove/<int:pk>",views.WishListRemoveAV.as_view(),name="wishlist-remove")
+
 ]

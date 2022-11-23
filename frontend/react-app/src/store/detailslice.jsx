@@ -2,11 +2,24 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const Detailslice =createSlice({
     name:"DetailSlice",
-    initialState:{product:{},loaded:false,active:false,similarproduct:[],curId:0,render:false,popout:false},
+    initialState:{
+        product:{},
+        loaded:false,
+        active:false,
+        similarproduct:[],
+        curId:0,
+        render:false,
+        popout:false,
+        activeproduct:0,
+    },
     reducers:{
         setproduct(state,action){
             state.product=action.payload
+            state.activeproduct = action.payload.detail.id
+            console.log(action.payload.detail.id)
             state.loaded=true
+            state.render=true
+
         },
         setadsactive(state){
             state.active= true
@@ -22,7 +35,8 @@ export const Detailslice =createSlice({
         },
         setpopout(state,action){
             state.popout = action.payload
-        }
+        },
+    
 
     }
 })

@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from .models import Product,Review,Category,Store
+from .models import Product,Review,Category,Store,UserProfile2
+from django.contrib.auth.models import User
 
 pathname = "https://res.cloudinary.com/da3wqzkz3/image/upload/v1664193313/"
 class Reviewserializer(serializers.ModelSerializer):
@@ -52,4 +53,11 @@ class StoreSerializer(serializers.ModelSerializer):
     def get_store(self,object):
         return object.name
 
-        
+
+class UserSerializer(serializers.ModelSerializer):
+    purchasedField  = Productserializer(many=True,read_only=True)
+    wishlist = Productserializer(many=True,read_only=True)
+    user = serializers.StringRelatedField()
+    class Meta:
+        model = UserProfile2
+        fields="__all__"

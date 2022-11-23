@@ -8,44 +8,36 @@ import { store } from './store/store'
 import Category from "./category/index"
 import Detail from './detail/Detail'
 import { useSelector,useDispatch } from 'react-redux'
-import {AutoPredictFetch,CategoryFetch,InitiaTokenFetch} from "./store/datafetch"
+import {AutoPredictFetch,CategoryFetch,InitiaTokenFetch,Userinfo} from "./store/datafetch"
 import CartMain from './CartList/CartMain'
 import Search from './search/Search'
 import Login from './login/Login'
+import  {authActions} from "./store/authslice"
+import Profile from "./profile/profile"
 
-let first = false
+
+let first = true
 let firstrender = true
+
+
 
 export default function Main() {
   const dispatch = useDispatch()
-  const UserInput = useSelector((state=>state.product.search.userinput))
+  const UserInput = useSelector((state=>state.search.predict))
   const dactive = useSelector((state=>state.detail.active))
   const catActive = useSelector((state=>state.category.active))
   const searchparam = useSelector((state=>state.search.params))
-  const auth = useSelector((state=>state.auth))
+  const isloaded = useSelector((state=>state.auth.isloaded))
   const loginsatus = useSelector((state=>state.auth.loginstatus))
-  
+  // console.log(useSelector((state=>state.auth)))
+  const accessToken = useSelector((state=>state.auth.token.access))
   const anonymous = window.localStorage.getItem("anonymous")
   if (anonymous === null){
     let r = (Math.random() + 1).toString(36).substring(7)
     window.localStorage.setItem("anonymous",r)
   }
-  console.log(window.localStorage.getItem("anonymous"))
-  useEffect(()=>{
-    if (firstrender){
-      firstrender=false
-      const token = JSON.parse(window.localStorage.getItem("access"))
-      if (token !== null){
-          dispatch(InitiaTokenFetch(token))
-          const interval = setInterval(()=>{
-            console.log("alive")
-            const token = JSON.parse(window.localStorage.getItem("access"))
-            dispatch(InitiaTokenFetch(token))
-          },300000)
-     
-      }
-  }
-  },[])
+  // console.log(accessToken)
+
 
   useEffect(()=>{
     if (first){
@@ -57,10 +49,30 @@ export default function Main() {
 
   useEffect(()=>{
     dispatch(CategoryFetch())
-  },[])
-  
 
+  },[])
+  useEffect(()=>{
+    if (firstrender){
+      firstrender=false
+      const token = JSON.parse(window.localStorage.getItem("access"))
+      if (token !== null){
+          dispatch(InitiaTokenFetch(token))
+          const interval = setInterval(()=>{
+            const token = JSON.parse(window.localStorage.getItem("access"))
+            dispatch(InitiaTokenFetch(token))
+          },300000)
+      }
+  }
+  },[])
+
+  useEffect(()=>{
+    if (accessToken !== null){
+       dispatch(Userinfo(accessToken))
+    }
+    dispatch(authActions.setloader())
+  },[accessToken])
   return (
+    <>{isloaded &&
     <BrowserRouter>
          <Routes>
             <Route path='/' element={<Home/>}></Route>
@@ -77,8 +89,12 @@ export default function Main() {
             <Route path='/login' element={
             loginsatus !== 200? <Login/>:(<Navigate replace to="/"/>)}>
             </Route>
+            <Route path ='/profile' element={<Profile/>}></Route>
           </Routes>
+        
     </BrowserRouter>
+ 
+  }</>
   )
 }
 

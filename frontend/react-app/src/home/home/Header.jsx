@@ -1,7 +1,6 @@
 import React,{useEffect, useState} from 'react'
 import {logo,camera,station} from '../../assests/index.js'
 import { Cart,Sliders,MinHeader } from '../components.jsx'
-import {categories,Searchresults,SlideImage} from '../../constants/index.js'
 import {motion,AnimatePresence} from 'framer-motion'
 import { NavbarAn } from '../xanimation.jsx'
 import {useInView} from "react-intersection-observer"
@@ -30,6 +29,7 @@ export default function Header(){
   const Searchresult= useSelector((state=>state.product.search.autopredict))
   const navigate=useNavigate()
   const [params,setparams] =useState("")
+  const user = useSelector((state=>state.auth.userinfo))
 
   function setCategoryID(id){
     dispatch(categoryactions.setCategoryID(id))
@@ -85,7 +85,7 @@ export default function Header(){
   function SearchDiv(e){
     setisSearching(true)
     setToggle(false)
-    dispatch(Productactions.updateinput(e.target.value))
+    dispatch(searchaction.updatepredicter(e.target.value))
 
 
   }
@@ -133,7 +133,7 @@ export default function Header(){
             <span className='md:hidden'><Cart name = {0}/></span>
         </div> 
         <div className='md:w-3/12 hidden md:flex relative items-center justify-between px-1'>
-          <span><User name="Ayomide" items={["profile","Orders","saved Items"]} type="user"/></span>
+          <span><User name= {user.id?user.user:"log in"} items={["profile","Orders","saved Items"]} type="user"/></span>
           <span><User name="Admin" items ={["Products","View"]} type="admin"/></span>
           <span><Cart name={0}/></span>  
         </div>
@@ -162,7 +162,7 @@ export default function Header(){
       {toggle &&<motion.div className="fixed w-full bg-black/10 h-full  top-15 left-0 z-50 md:hidden" variants={NavbarAn} initial="initial" animate="animate">
           <div className='w-10/12 h-full bg-[#FAF9F6] py-4  px-4 md:px-6'>
             <h1 className='style-heading'>My Magneto Account</h1>
-            <span className='block mb-3'><User name="Ayomide" items={["profile","Orders","Saved Items"]} type="user" status="nav"/></span>
+            <span className='block mb-3'><User name={user!=={}?user.user:"log in here"} items={["profile","Orders","Saved Items"]} type="user" status="nav"/></span>
             <span className='block mb-3'><User name="Admin" items ={["Products","View"]} type="admin" status="nav"/></span>
             <h1 className='style-heading'>Categories</h1>
             <ul>

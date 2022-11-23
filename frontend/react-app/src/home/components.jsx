@@ -26,7 +26,7 @@ export function Sliders(props){
 
 export function MinHeader(props){
   return(
-    <div className='flex justify-center py-4 mb-2'>
+    <div className='flex justify-center py-4 mb-2 relative overflow-hidden'>
     <h1 className='py-1 px-3 bg-[#5858ec] relative header-design before:left-[55px] text-white z-20 rounded-md'>
        {props.label}</h1>
     </div>
@@ -34,7 +34,7 @@ export function MinHeader(props){
 }
 export function MinHeader2(props){
   return(
-    <div className='flex justify-center py-4 mb-2'>
+    <div className='flex justify-center py-4 mb-2 relative overflow-hidden'>
     <h1 className='py-1 px-3 bg-[#5858ec] relative header-design before:left-[35px] text-white z-20 rounded-md'>
        {props.label}</h1>
     </div>
@@ -281,17 +281,26 @@ export function StoreDetail(prop){
 }
 export function MinHeader4(props){
   return(
-    <div className='flex justify-center py-4 mb-2'>
+    <div className='flex justify-center py-4 mb-2 relative overflow-hidden'>
     <h1 className='py-1 px-3 bg-[#5858ec] relative header-design before:left-[65px] text-white z-20 rounded-md'>
        {props.label}</h1>
+       <div className="absolute bg-[#5858ec]/50 w-[120%] top-6 h-2 -rotate-2"><span className="opacity-0">a</span></div>
     </div>
   )
 }
 export function MinHeaderDy(props){
   console.log(props.left)
   return(
-    <div className='flex justify-center py-4 mb-2'>
+    <div className='flex justify-center py-4 mb-2 relative overflow-hidden'>
     <h1 className={`py-1 px-3 bg-[#5858ec] relative header-design before:left-[90px] text-white z-20 rounded-md`}>
+       {props.label}</h1>
+    </div>
+  )
+}
+export function MinHeaderProfile(props){
+  return(
+    <div className='flex justify-center py-4 mb-2 relative overflow-hidden'>
+    <h1 className={`py-1 px-3 bg-[#5858ec] relative header-design before:left-[75px] text-white z-20 rounded-md`}>
        {props.label}</h1>
     </div>
   )

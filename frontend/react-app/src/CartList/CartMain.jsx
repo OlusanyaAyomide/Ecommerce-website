@@ -3,16 +3,28 @@ import Header from '../detail/detail/Header'
 import CatHero from './cartlist/CartHero'
 import Checkout from './cartlist/Checkout'
 import { useSelector,useDispatch } from 'react-redux'
-import { RecentFetch } from '../store/datafetch'
+import { RecentFetch,CheckoutCart } from '../store/datafetch'
 import Recent from './cartlist/Recent'
+
 
 export default function CartMain(){
   const isloaded = useSelector((state=>state.cart.loaded))
-  const dispatch = useDispatch(
+  const {sendToServer} = useSelector((state=>state.cart))
+  const {cart} = useSelector((state=>state))
+  const accessToken = useSelector((state=>state.auth.token.access))
+  console.log(cart)
+  console.log(sendToServer)
+  const dispatch = useDispatch()
   useEffect(()=>{
     dispatch(RecentFetch())
-  })
-  )
+  },[])
+  useEffect(()=>{
+    if (!sendToServer){
+      return}
+    dispatch(CheckoutCart(cart,accessToken))
+  },[sendToServer])
+
+
   return (
    <>{isloaded && 
    <div>

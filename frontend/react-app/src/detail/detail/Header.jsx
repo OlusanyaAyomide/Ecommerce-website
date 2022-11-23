@@ -29,7 +29,6 @@ export default function Header(){
 
   function setCategoryID(id){
     dispatch(categoryactions.setCategoryID(id))
-    console.log(id)
     navigate("/category")
   }
   const CategoryItems = CategoryList.map((items,key)=>{
@@ -39,8 +38,8 @@ export default function Header(){
   })
   function Autocomplete(value){
     console.log(value)
-    navigate("/search")
     dispatch(searchaction.updateparams(value))
+    navigate("/search")
   }
   const SearchList  = Searchresult.map((item,key)=>{
     return(
@@ -50,18 +49,18 @@ export default function Header(){
     )
   })
   function handleSearch(){
-    console.log(params)
     dispatch(searchaction.updateparams(params))
     navigate("/search")
   }
   function changeInput(e){
-    console.log(e.target.value)
     setparams(e.target.value)
   }
 
 
   function Blurout(){
-    setisSearching(false)
+    setTimeout(()=>{
+      setisSearching(false)
+    },300)
   }
   function dropdown(){
     setdrop((prev=>!prev))
@@ -78,7 +77,7 @@ export default function Header(){
   function SearchDiv(e){
     setisSearching(true)
     setToggle(false)
-    dispatch(Productactions.updateinput(e.target.value))
+    dispatch(searchaction.updatepredicter(e.target.value))
 
 
   }
@@ -171,22 +170,6 @@ export default function Header(){
               {SearchList}
             </ul>
         </div>}
-
-        
-        {/* <div className='row bg-gradient-to-b from-[#5858ec]/10 to-transparent pb-5 -mx-4 md:-mx-6 px-4 md:px-6'>
-          <div className='hidden md:w-3/12 md:block'>
-            <div>
-              <ul>              
-                 <Link to={"/"}>
-                  <li className='py-1 hover:before:bg-black/20  dark-cover relative before:animate-all rounded-sm overflow-hidden before:duration-300 text-gray-900'>All Products</li>
-                  </Link>
-                
-                {CategoryItems}
-              </ul>
-            </div>
-          </div>
-        </div> */}
-
     
     </section>
   )

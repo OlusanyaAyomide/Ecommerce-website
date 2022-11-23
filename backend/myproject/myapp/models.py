@@ -46,7 +46,6 @@ class AnonymousUser(models.Model):
     def __str__(self):
         return self.key
 
-
 class Review(models.Model):
     rating = models.PositiveIntegerField(validators = [MinValueValidator(1),MaxValueValidator(5)])
     comment = models.CharField(max_length = 2000)
@@ -54,6 +53,23 @@ class Review(models.Model):
     product = models.ForeignKey(Product,on_delete=models.CASCADE,related_name="review")
     customer = models.ForeignKey(User,on_delete = models.CASCADE,related_name = "reviews")
     title = models.CharField(max_length =100,null = True)
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User,on_delete = models.CASCADE,related_name="profile")
+    purchased = models.ManyToManyField(Product,related_name="purchased")
+    admin = models.BooleanField(default=False,blank=True)
+
+class UserProfile2(models.Model):
+    user = models.OneToOneField(User,on_delete = models.CASCADE,related_name="profile2")
+    purchasedField = models.ManyToManyField(Product,related_name="myproduct")
+    admin = models.BooleanField(default=False,blank=True)
+    wishlist = models.ManyToManyField(Product,related_name="wishlists")
+
+    def __str__(self):
+        return f"{self.user.username} Second Profile"
+
+
+
 
 
 
