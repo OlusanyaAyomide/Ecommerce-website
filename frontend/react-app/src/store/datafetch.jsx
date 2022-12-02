@@ -304,6 +304,10 @@ export function InitiaTokenFetch(token){
             if (status===200){
                 console.log(response)
                 dispatch(authActions.setTokens(response))}
+            else{
+                dispatch(authActions.resetuserinfo())
+                
+            }
        
         }
         catch{"error encoutered"}

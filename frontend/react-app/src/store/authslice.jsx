@@ -51,6 +51,13 @@ export const authslice = createSlice({
         },
         setisloaded(state){
             state.isloaded = true
+        },
+        resetuserinfo(state){
+            console.log("redux resetting")
+            state.userinfo={}
+            localStorage.removeItem("current")
+            localStorage.removeItem("access")
+            state.isloaded = true
         }
     },
 })

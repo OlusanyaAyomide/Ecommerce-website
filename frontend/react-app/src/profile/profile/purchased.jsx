@@ -66,7 +66,7 @@ export default function Purchased() {
     )
   })
   return (
-    <section className='bg-gradient-to-b from-[#5858ec]/10'>
+    <section className='bg-gradient-to-b from-[#5858ec]/10' id="purchased">
         {showMessage && <SuccessDiv/>}
         <div className='flex w-full '>
           <div className="w-full relative">

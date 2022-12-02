@@ -30,6 +30,7 @@ export default function Main() {
   const isloaded = useSelector((state=>state.auth.isloaded))
   const loginsatus = useSelector((state=>state.auth.loginstatus))
   const accessToken = useSelector((state=>state.auth.token.access))
+  const user = useSelector((state=>state.auth.userinfo))
   const anonymous = window.localStorage.getItem("anonymous")
   if (anonymous === null){
     let r = (Math.random() + 1).toString(36).substring(7)
@@ -72,8 +73,10 @@ export default function Main() {
 
   useEffect(()=>{
     if (accessToken !== null){
-      console.log("rannn")
        dispatch(Userinfo(accessToken))
+    }
+    else{
+      dispatch(authActions.resetuserinfo())
     }
   },[accessToken])
   return (
@@ -94,9 +97,9 @@ export default function Main() {
             <Route path='/login' element={
             loginsatus !== 200? <Login/>:(<Navigate replace to="/"/>)}>
             </Route>
-            <Route path ='/profile' element={<Profile/>}></Route>
+            {/* <Route path ='/profile'  element={<Profile/>}></Route> */}
+            <Route path ='/profile'  element={user.id?<Profile/>:(<Navigate replace to="/"/>)}></Route>
           </Routes>
-        
     </BrowserRouter>
  
   }</>
