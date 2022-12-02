@@ -12,7 +12,6 @@ export default function Feedback() {
     const products = useSelector((state=>state.detail.product))
     const product = products.detail
     const {userinfo} = useSelector((state=>state.auth))
-    console.log(userinfo)
     const AffStores = products.detail.stores
     const dispatch = useDispatch()
     const popout = useSelector((state=>state.detail.popout))
@@ -49,7 +48,7 @@ export default function Feedback() {
     function AddToCart(){
         return(
         <div className='row mt flex items-center h-[50px] fixed md:static bottom-0 w-full rounded-lg px-2 md:px-0 z-50 bg-[#5858ec]'>     
-            <button className='block w-6/12 text-white border-r h-full text-left' onClick={AddOrRemoveWishList}><i className='fa fa-heart text-white text-lg px-4'></i>{inWishList()?"Remove from wishlist":"Add to wishlist"}</button>
+            <button className={`block w-6/12 text-white border-r h-full text-left`} onClick={AddOrRemoveWishList}><i className='fa fa-heart text-white text-lg px-4'></i>{inWishList()?"Remove item":"Add to wishlist"}</button>
             <button className='w-6/12 text-white text-left flex h-full items-center' onClick={handleCartAdd}><i className='fa fa-cart-plus text-white text-2xl px-4'></i> Add to cart</button>
             
         </div>

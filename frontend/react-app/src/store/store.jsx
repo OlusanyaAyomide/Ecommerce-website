@@ -5,6 +5,7 @@ import { categoryslice } from "./categoryslice";
 import { Detailslice } from "./detailslice";
 import { SearchSlice } from "./searchslice";
 import { authslice } from "./authslice";
+import { ReviewSlice } from "./reviewslice";
 
 export const store = configureStore({
     reducer:{
@@ -14,5 +15,6 @@ export const store = configureStore({
         detail:Detailslice.reducer,
         search:SearchSlice.reducer,
         auth:authslice.reducer,
+        review:ReviewSlice.reducer,
     }
 })

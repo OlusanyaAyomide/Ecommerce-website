@@ -35,6 +35,8 @@ export const authslice = createSlice({
             state.userinfo = action.payload
             state.addwishlistloading = false
             state.removewishloading = false
+            state.isloaded = true
+
         },
         setloader(state){
             state.isloaded = true
@@ -46,6 +48,9 @@ export const authslice = createSlice({
         setremovewishlist(state){
             state.removewishloading = true
             console.log("setting remove to true")
+        },
+        setisloaded(state){
+            state.isloaded = true
         }
     },
 })

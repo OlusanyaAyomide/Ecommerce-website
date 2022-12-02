@@ -6,6 +6,7 @@ import { detailaction } from './detailslice'
 import { Cartaction } from './cartslice'
 import { searchaction } from './searchslice'
 import { authActions } from './authslice'
+import { reviewactions } from './reviewslice'
 
 
 
@@ -301,6 +302,7 @@ export function InitiaTokenFetch(token){
         try{
             const response =await FetchToken()
             if (status===200){
+                console.log(response)
                 dispatch(authActions.setTokens(response))}
        
         }
@@ -439,5 +441,45 @@ export function WishListRemove(productid,token){
             }
         }
         catch(err){console.log(err)}
+    }
+}
+
+
+export function CreateReview(token,productid,comment,title,rating){
+    let status = 0;
+    return async(dispatch)=>{
+        async function FethcApi(){
+            const res = await fetch(`${host}/review-create/${productid}`,{
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json",
+                    "Authorization": `Bearer ${token}`,
+                },
+                body:JSON.stringify({
+                    "title":title,
+                    "comment":comment,
+                    "rating":rating
+                })
+            })
+            status = res.status
+            const data = await res.json()
+            console.log(data)
+            return data
+        }
+        try{
+            const response = await FethcApi()
+            console.log(response)
+            console.log(status)
+            if (status === 200){
+                dispatch(authActions.setuserinfo(response))
+                console.log(response)
+                dispatch(reviewactions.setReviewStatus(status))
+            } 
+            console.log(response)
+        }
+        catch(err){
+            console.log(err)
+        }
+
     }
 }

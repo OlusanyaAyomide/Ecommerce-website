@@ -70,6 +70,3 @@ class UserProfile2(models.Model):
 
 
 
-
-
-

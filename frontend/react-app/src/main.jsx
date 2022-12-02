@@ -29,15 +29,12 @@ export default function Main() {
   const searchparam = useSelector((state=>state.search.params))
   const isloaded = useSelector((state=>state.auth.isloaded))
   const loginsatus = useSelector((state=>state.auth.loginstatus))
-  // console.log(useSelector((state=>state.auth)))
   const accessToken = useSelector((state=>state.auth.token.access))
   const anonymous = window.localStorage.getItem("anonymous")
   if (anonymous === null){
     let r = (Math.random() + 1).toString(36).substring(7)
     window.localStorage.setItem("anonymous",r)
   }
-  // console.log(accessToken)
-
 
   useEffect(()=>{
     if (first){
@@ -57,7 +54,15 @@ export default function Main() {
       const token = JSON.parse(window.localStorage.getItem("access"))
       if (token !== null){
           dispatch(InitiaTokenFetch(token))
-          const interval = setInterval(()=>{
+          let interval
+          try{
+            clearInterval(interval)
+            console.log("clear Interval")
+          }
+          catch(err){
+              console.log(err)
+          }
+          interval = setInterval(()=>{
             const token = JSON.parse(window.localStorage.getItem("access"))
             dispatch(InitiaTokenFetch(token))
           },300000)
@@ -67,9 +72,9 @@ export default function Main() {
 
   useEffect(()=>{
     if (accessToken !== null){
+      console.log("rannn")
        dispatch(Userinfo(accessToken))
     }
-    dispatch(authActions.setloader())
   },[accessToken])
   return (
     <>{isloaded &&

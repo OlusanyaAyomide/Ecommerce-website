@@ -1,10 +1,11 @@
 import React,{useState} from 'react'
 import { useSelector } from 'react-redux'
 import { convert } from '../../home/components'
-import { Link } from 'react-router-dom'
+import { Link,useNavigate } from 'react-router-dom'
 import { Cartaction } from '../../store/cartslice'
 import { useDispatch } from 'react-redux'
 import PaystackPop from '@paystack/inline-js'
+import { useEffect } from 'react'
 
 
 
@@ -14,7 +15,10 @@ export default function Checkout() {
     const dispatch =useDispatch()
     const [popout,setpopout] = useState(false)
     const [remove,setremove] = useState(false)
+    const [firstrender,setfirstrender] = useState(false)
     const [checkedout,setcheckedout] = useState(false)
+    const navigate = useNavigate()
+    const [successstatus,setsuccessstatus] = useState(false)
 
 
     function handlepayment(){
@@ -29,6 +33,16 @@ export default function Checkout() {
       onSuccess(transaction){
         dispatch(Cartaction.setSendToServer(true))
         console.log( `payment complete refrence id: ${transaction.reference}`)
+        dispatch(Cartaction.setSendToServer(true))
+        setTimeout(()=>{
+          setsuccessstatus(true)
+          setTimeout(()=>{
+              setsuccessstatus(false)
+            setTimeout(()=>{  
+              navigate("/profile")
+          },500)
+          },2000)
+        },200)
        
       },
       onCancel(){console.log("Transactiion Cancelled")}
@@ -58,6 +72,7 @@ export default function Checkout() {
     function handlecheckout(){
         setcheckedout(true)
     }
+
     
     function increaseCart(item){
       if(getDetail(item.id) <5){
@@ -91,6 +106,16 @@ export default function Checkout() {
       return products.price + (products.quantity * 240) + (products.price * 0.05 )
     }
 
+    useEffect(()=>{
+      if(firstrender){
+        setfirstrender(false)
+        return
+      }
+      if(status === 1){
+
+      }
+    },[status])
+
     const CartItems=products.productlist.map((item,key)=>{
         return(
             <div className='bg-white my-1 p-2' key={key}>
@@ -122,14 +147,16 @@ export default function Checkout() {
             </div>
         )
     })
+
+    const Popout=(prop)=>{
+      return(
+      <div className='flex justify-center bg-[#36f736] py-2 w-full z-50 text-white fixed top-0'>{prop.label}</div> )
+    }
   return (
     <section>
-        {popout && <div className='flex justify-center bg-[#36f736] py-2 w-full z-50 text-white fixed top-0'>
-            Product succesfully added to cart
-        </div>}
-        {remove && <div className='flex justify-center bg-[#36f736] py-2 w-full z-50 text-white fixed top-0'>
-            Product succesfully removed from Cart
-        </div>}
+        {popout && <Popout label = {"Product Succesfully Added To Cart"}/>}
+        {remove && <Popout label = {"Product Succesfylly Removed From Cart"}/>}
+        {successstatus && <Popout label = {"Purchase Successfully,Redirecting To Profile"}/>}
         <div className='row'>
             <div className='w-full md:w-8/12 lg:w-9/12 px-2  bg-slate-300 py-1 h-full'>
                 <h1 className='bg-white -mb-1 rounded-tr-md rounded-tl-md px-4 font-semibold'>CART ({products.quantity})</h1>
@@ -160,11 +187,19 @@ export default function Checkout() {
                       <span className='font-semibold text-lg'>₦{(products.price * 0.05).toLocaleString()}</span>
                     </div>
                     <div className='py-1 rounded-xl md:px-2 '>
-                 {/* {products.quantity > 0 && <button className='bg-[#5858ec] w-full block font-semibod mt-10 text-xl text-white py-2 rounded-md shadow-gray-700 shadow-md' onClick={handlepayment}>Pay Now (₦{(getTotal()).toLocaleString()})</button>}  */}
-                 {products.quantity > 0 && <button className='bg-[#5858ec] w-full block font-semibod mt-10 text-xl text-white py-2 rounded-md shadow-gray-700 shadow-md' onClick={()=>{
-                  console.log("clicked")
+                 {products.quantity > 0 && <button className='bg-[#5858ec] w-full block font-semibod mt-10 text-xl text-white py-2 rounded-md shadow-gray-700 shadow-md' onClick={handlepayment}>Pay Now (₦{(getTotal()).toLocaleString()})</button>} 
+                 {/* {products.quantity > 0 && <button className='bg-[#5858ec] w-full block font-semibod mt-10 text-xl text-white py-2 rounded-md shadow-gray-700 shadow-md' onClick={()=>{
                     dispatch(Cartaction.setSendToServer(true))
-                 }}>Pay Now (₦{(getTotal()).toLocaleString()})</button>}
+                    setTimeout(()=>{
+                      setsuccessstatus(true)
+                      setTimeout(()=>{
+                          setsuccessstatus(false)
+                        setTimeout(()=>{  
+                          navigate("/profile")
+                      },1000)
+                      },2000)
+                    },500)
+                 }}>Pay Now (₦{(getTotal()).toLocaleString()})</button>} */}
               </div>
                   </div> 
                 

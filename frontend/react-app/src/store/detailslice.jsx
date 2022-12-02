@@ -16,7 +16,6 @@ export const Detailslice =createSlice({
         setproduct(state,action){
             state.product=action.payload
             state.activeproduct = action.payload.detail.id
-            console.log(action.payload.detail.id)
             state.loaded=true
             state.render=true
 

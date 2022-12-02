@@ -11,6 +11,7 @@ from django.db.models import Avg,Count,Q
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated
 import random
+from rest_framework.exceptions import ValidationError
 
 # Create your views here.
 
@@ -203,3 +204,26 @@ class WishListRemoveAV(APIView):
         userprofile.save()
         serializer = UserSerializer(userprofile)
         return Response(serializer.data)
+
+
+
+class ReviewCreateAV(APIView):
+    permission_classes=[IsAuthenticated]
+    def post(self,request,pk):
+        product = Product.objects.get(id = pk)
+        userprofile = request.user.profile2
+        purchased = False
+        print(product)
+        for productitem in userprofile.purchasedField.all():
+            if productitem == product:
+                purchased = True 
+        print("loop completed")
+        print(purchased)
+        if not purchased:
+            print("revertingg")
+            raise ValidationError("Product Not Purchased By User")
+        serializer = Reviewserializer(data = request.data)
+        if serializer.is_valid():
+            serializer.save(product = product,customer = self.request.user)
+            userserializer = UserSerializer(userprofile)
+            return Response(userserializer.data)

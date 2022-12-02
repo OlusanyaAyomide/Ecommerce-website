@@ -6,7 +6,6 @@ import { useSelector,useDispatch } from 'react-redux'
 import { RecentFetch,CheckoutCart } from '../store/datafetch'
 import Recent from './cartlist/Recent'
 
-
 export default function CartMain(){
   const isloaded = useSelector((state=>state.cart.loaded))
   const {sendToServer} = useSelector((state=>state.cart))
@@ -32,6 +31,7 @@ export default function CartMain(){
     <div><CatHero/></div>
     <div><Checkout/></div>
     <div><Recent/></div>
-  </div>}</>
+  </div>}
+  </>
   )
 }

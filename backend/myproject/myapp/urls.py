@@ -20,6 +20,7 @@ urlpatterns = [
     path("catrending/<int:pk>",views.TrendingGV.as_view(),name="trending-category"),
     path("checkout",views.CheckOutAV.as_view(),name="checkout"),
     path("wishlist/<int:pk>",views.WishListAV.as_view(),name="wishlist"),
-    path("wishlistremove/<int:pk>",views.WishListRemoveAV.as_view(),name="wishlist-remove")
+    path("wishlistremove/<int:pk>",views.WishListRemoveAV.as_view(),name="wishlist-remove"),
+    path("review-create/<int:pk>",views.ReviewCreateAV.as_view(),name = "review-create")
 
 ]

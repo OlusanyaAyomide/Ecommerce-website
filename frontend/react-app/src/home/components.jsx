@@ -284,7 +284,6 @@ export function MinHeader4(props){
     <div className='flex justify-center py-4 mb-2 relative overflow-hidden'>
     <h1 className='py-1 px-3 bg-[#5858ec] relative header-design before:left-[65px] text-white z-20 rounded-md'>
        {props.label}</h1>
-       <div className="absolute bg-[#5858ec]/50 w-[120%] top-6 h-2 -rotate-2"><span className="opacity-0">a</span></div>
     </div>
   )
 }
@@ -301,6 +300,14 @@ export function MinHeaderProfile(props){
   return(
     <div className='flex justify-center py-4 mb-2 relative overflow-hidden'>
     <h1 className={`py-1 px-3 bg-[#5858ec] relative header-design before:left-[75px] text-white z-20 rounded-md`}>
+       {props.label}</h1>
+    </div>
+  )
+}
+export function MinHeaderwishlist(props){
+  return(
+    <div className='flex justify-center py-4 mb-2 relative overflow-hidden'>
+    <h1 className={`py-1 px-6 bg-[#5858ec] relative header-design before:left-[38px] text-white z-20 rounded-md`}>
        {props.label}</h1>
     </div>
   )

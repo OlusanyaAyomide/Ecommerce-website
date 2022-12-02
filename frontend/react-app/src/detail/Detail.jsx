@@ -21,7 +21,6 @@ export default function Detail() {
     const {activeproduct} = useSelector((state=>state.detail))
     const dispatch = useDispatch()
     const {addwishlistloading,removewishloading} = useSelector((state=>state.auth))
-    console.log(addwishlistloading,`remove ${removewishloading}`)
 
     useEffect(()=>{
       dispatch(SimilarFetch(Select))

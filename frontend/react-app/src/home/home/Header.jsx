@@ -162,7 +162,7 @@ export default function Header(){
       {toggle &&<motion.div className="fixed w-full bg-black/10 h-full  top-15 left-0 z-50 md:hidden" variants={NavbarAn} initial="initial" animate="animate">
           <div className='w-10/12 h-full bg-[#FAF9F6] py-4  px-4 md:px-6'>
             <h1 className='style-heading'>My Magneto Account</h1>
-            <span className='block mb-3'><User name={user!=={}?user.user:"log in here"} items={["profile","Orders","Saved Items"]} type="user" status="nav"/></span>
+            <span className='block mb-3'><User name={user.id?user.user:"log in here"} items={["profile","Orders","Saved Items"]} type="user" status="nav"/></span>
             <span className='block mb-3'><User name="Admin" items ={["Products","View"]} type="admin" status="nav"/></span>
             <h1 className='style-heading'>Categories</h1>
             <ul>
@@ -170,8 +170,7 @@ export default function Header(){
                   <li className='py-1 hover:before:bg-black/20  dark-cover relative before:animate-all rounded-sm overflow-hidden before:duration-300 text-gray-900'>All Products</li>
               </Link>  
               {CategoryItems}
-            </ul>
-          </div>
+            </ul>          </div>
       </motion.div>}
       {isearching && <div className='fixed w-full bg-gray-100 z-50 -ml-4 px-4'>
             <ul>
