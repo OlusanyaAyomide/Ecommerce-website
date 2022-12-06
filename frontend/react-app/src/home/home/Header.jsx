@@ -18,7 +18,7 @@ export default function Header(){
   const[toggle,setToggle] = useState(false)
   const[drop,setdrop] = useState(false)
   const [admin,setadmin] = useState(false)
-  // const [CategoryList,setCategoryList] = useState(categories)
+
   const [isearching,setisSearching] = useState()
   const [count,setcount] = useState(0)
   const [scrolref,scrolling] = useInView()
@@ -30,6 +30,7 @@ export default function Header(){
   const navigate=useNavigate()
   const [params,setparams] =useState("")
   const user = useSelector((state=>state.auth.userinfo))
+  console.log(useSelector((state=>state.auth.loginstatus)))
 
   function setCategoryID(id){
     dispatch(categoryactions.setCategoryID(id))
@@ -91,7 +92,10 @@ export default function Header(){
   }
 
   function headerouter(param){
+    console.log(param)
     if(param === "login"){
+      console.log("navigating...")
+
       navigate("/login")
     }
     else if(param === "profile"){
@@ -99,7 +103,8 @@ export default function Header(){
     }
     else if(param === "logout"){
       dispatch(authActions.resetuserinfo())
-      navigate("/login")
+      dispatch(authActions.zerostatus())
+      navigate("/")
     }
     else if(param === "View Cart"){
       navigate("/cart")
@@ -109,7 +114,6 @@ export default function Header(){
   function User(props){
     const check = ()=>{if (props.type === 'user'){return drop}return admin}
     const click=()=>{if (props.type === 'user'){return dropdown}return ChangeAdmin}
-    console.log(props)
     return (
       <div className='font-semibold text-[14px]'>{props.name}
            <i className={`${!check()?'fa fa-angle-down':'fa fa-angle-up'} ml-1`} onClick={click()}></i>
@@ -151,7 +155,7 @@ export default function Header(){
             <span className='md:hidden'><Cart name = {0}/></span>
         </div> 
         <div className='md:w-3/12 hidden md:flex relative items-center justify-between px-1'>
-          <span><User name= {user.id?user.user:"log in"} items={user.id?["profile","Orders","View Cart","logout"]:["login"]} type="user"/></span>
+          <span><User name= {user.id?user.user:"log in"} items={user.id?["profile","View Cart","logout"]:["login"]} type="user"/></span>
           <span className='hidden'><User name="Admin" items ={["Products","View"]} type="admin"/></span>
           <span><Cart name={0}/></span>  
         </div>
@@ -180,7 +184,7 @@ export default function Header(){
       {toggle &&<motion.div className="fixed w-full bg-black/10 h-full  top-15 left-0 z-50 md:hidden" variants={NavbarAn} initial="initial" animate="animate">
           <div className='w-10/12 h-full bg-[#FAF9F6] py-4  px-4 md:px-6'>
             <h1 className='style-heading'>My Magneto Account</h1>
-            <span className='block mb-3'><User name={user.id?user.user:"log in here"} items={user.id?["profile","View Cart","Logout"]:["login"]} type="user" status="nav"/></span>
+            <span className='block mb-3'><User name={user.id?user.user:"log in"} items={user.id?["profile","View Cart","Logout"]:["login"]} type="user" status="nav"/></span>
             <span className='mb-3 hidden'><User name="Admin" items ={["Products","View"]} type="admin" status="nav"/></span>
             <h1 className='style-heading'>Categories</h1>
             <ul>

@@ -13,6 +13,7 @@ import CartMain from './CartList/CartMain'
 import Search from './search/Search'
 import Login from './login/Login'
 import  {authActions} from "./store/authslice"
+import Gapi from './Gapi'
 import Profile from "./profile/profile"
 
 
@@ -99,6 +100,7 @@ export default function Main() {
             </Route>
             {/* <Route path ='/profile'  element={<Profile/>}></Route> */}
             <Route path ='/profile'  element={user.id?<Profile/>:(<Navigate replace to="/"/>)}></Route>
+            <Route path ="/google" element={<Gapi/>}></Route>
           </Routes>
     </BrowserRouter>
  

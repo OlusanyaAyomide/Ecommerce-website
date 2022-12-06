@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom'
 import { searchaction } from '../../store/searchslice.jsx'
 import { useNavigate } from 'react-router-dom'
 import { categoryactions } from '../../store/categoryslice.jsx'
+import { authActions } from '../../store/authslice.jsx'
 
 
 
@@ -26,6 +27,7 @@ export default function Header(){
   const Searchresult= useSelector((state=>state.product.search.autopredict))
   const navigate=useNavigate()
   const [params,setparams] =useState("")
+  const user = useSelector((state=>state.auth.userinfo))
 
   function setCategoryID(id){
     dispatch(categoryactions.setCategoryID(id))
@@ -56,6 +58,23 @@ export default function Header(){
     setparams(e.target.value)
   }
 
+  function headerouter(param){
+    console.log(param)
+    if(param === "login"){
+      navigate("/login")
+    }
+    else if(param === "profile"){
+      navigate("/profile")
+    }
+    else if(param === "Logout"){
+      dispatch(authActions.resetuserinfo())
+      dispatch(authActions.zerostatus())
+      navigate("/")
+    }
+    else if(param === "View Cart"){
+      navigate("/cart")
+    }
+  }
 
   function Blurout(){
     setTimeout(()=>{
@@ -90,7 +109,9 @@ export default function Header(){
            {check() && <ul className={`${props.status?"":"absolute"} top-10 font-normal  py-1 bg-gray-100 rounded-md`}>
               {props.items.map((item,key)=>{
                 return(
-                  <li key={key} className="px-6 py-1 hover:before:bg-black/20  dark-cover relative before:animate-all rounded-md overflow-hidden before:duration-300"><a href="#"></a>{item}</li>
+                  <button onClick={()=>{
+                    console.log(item)
+                    headerouter(item)}} key={key} className="block px-6 py-1 hover:before:bg-black/20  dark-cover relative before:animate-all rounded-md overflow-hidden before:duration-300"><a href="#"></a>{item}</button>
                 )
               })}
            </ul>}
@@ -125,8 +146,8 @@ export default function Header(){
             <span className='md:hidden'><Cart name = {0}/></span>
         </div> 
         <div className='md:w-3/12 hidden md:flex relative items-center justify-between px-1'>
-          <span><User name="Ayomide" items={["profile","Orders","saved Items"]} type="user"/></span>
-          <span><User name="Admin" items ={["Products","View"]} type="admin"/></span>
+        <span className='block mb-3'><User name={user.id?user.user:"log in"} items={user.id?["profile","View Cart","Logout"]:["login"]} type="user"/></span>
+          <span className='hidden'><User name="Admin" items ={["Products","View"]} type="admin" /></span>
           <span><Cart name={0}/></span>  
         </div>
     
@@ -154,8 +175,8 @@ export default function Header(){
       {toggle &&<motion.div className="fixed w-full bg-black/10 h-full  top-15 left-0 z-50 md:hidden" variants={NavbarAn} initial="initial" animate="animate">
           <div className='w-10/12 h-full bg-[#FAF9F6] py-4  px-4 md:px-6'>
             <h1 className='style-heading'>My Magneto Account</h1>
-            <span className='block mb-3'><User name="Ayomide" items={["profile","Orders","Saved Items"]} type="user" status="nav"/></span>
-            <span className='block mb-3'><User name="Admin" items ={["Products","View"]} type="admin" status="nav"/></span>
+            {/* <span className='block mb-3'><User name="Ayomide" items={["profile","Orders","Saved Items"]} type="user" status="nav"/></span> */}
+            <span className='block mb-3'><User name={user.id?user.user:"log in"} items={user.id?["profile","View Cart","Logout"]:["login"]} type="user" status="nav"/></span>
             <h1 className='style-heading'>Categories</h1>
             <ul>
             <Link to={"/"}>

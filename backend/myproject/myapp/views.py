@@ -227,3 +227,20 @@ class ReviewCreateAV(APIView):
             serializer.save(product = product,customer = self.request.user)
             userserializer = UserSerializer(userprofile)
             return Response(userserializer.data)
+
+class SignUp(APIView):
+    def post(self,request):
+        print(request.body)
+        username = request.data["username"]
+        password = request.data["password"]
+        print(username,password)
+        print(len(password))
+        errorlist = []
+        if User.objects.filter(username = username).exists():
+            errorlist.append("Username already exists")
+        if len(password)<7:
+            print(len(password))
+            errorlist.append("Password is To short")
+        if len(errorlist) != 0:
+            return Response(errorlist,status=400)
+        return Response({"detail":"succesful"})

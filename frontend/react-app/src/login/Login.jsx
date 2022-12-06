@@ -3,11 +3,13 @@ import { useSelector,useDispatch } from 'react-redux'
 import { useState,useEffect } from 'react'
 import { LoginFetch } from '../store/datafetch'
 import { useNavigate } from 'react-router-dom'
+import {GoogleLogin} from 'react-google-login'
+import {gapi} from 'gapi-script'
 
 export default function Login() {
     const token = useSelector((state=>state.auth.token.access))
     const error= useSelector((state=>state.auth.loginerr))
-    console.log(error)
+    console.log(useSelector((state=>state.auth.loginstatus)))
     const navigate = useNavigate()
     let first = true
     useEffect(()=>{

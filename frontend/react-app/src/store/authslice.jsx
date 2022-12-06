@@ -23,6 +23,7 @@ export const authslice = createSlice({
             window.localStorage.setItem("access",JSON.stringify(storageToken))
             window.localStorage.setItem("current",JSON.stringify(action.payload.access))
             state.isauthenticated=true
+            state.loginstatus = 200
         },
         seterror(state,action){
             state.loginerr=action.payload.detail
@@ -30,6 +31,9 @@ export const authslice = createSlice({
         },
         setstatus(state,action){
             state.loginstatus = 200
+        },
+        zerostatus(state){
+            state.loginstatus=0
         },
         setuserinfo(state,action){
             state.userinfo = action.payload

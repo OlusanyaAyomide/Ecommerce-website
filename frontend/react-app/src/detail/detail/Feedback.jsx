@@ -1,11 +1,12 @@
 import React from 'react'
 import { Ratings } from '../../home/components'
-import { MinHeader2,StoreDetail } from '../../home/components'
+import { StoreDetail } from '../../home/components'
 import { useSelector,useDispatch } from 'react-redux'
 import { convert } from '../../home/components'
 import { Cartaction } from '../../store/cartslice'
 import { detailaction } from '../../store/detailslice'
 import { authActions } from '../../store/authslice'
+import { useNavigate } from 'react-router-dom'
 
 
 export default function Feedback() {
@@ -15,6 +16,10 @@ export default function Feedback() {
     const AffStores = products.detail.stores
     const dispatch = useDispatch()
     const popout = useSelector((state=>state.detail.popout))
+    const navigate = useNavigate()
+    const {loginstatus} = useSelector(({auth})=>auth)
+    console.log(loginstatus)
+    
 
     function handleCartAdd(){
         dispatch(Cartaction.addproduct({product}))  
@@ -35,6 +40,10 @@ export default function Feedback() {
         return false
     }
     function AddOrRemoveWishList(){
+        if (loginstatus === 0){
+            navigate("/login")
+            return
+        }
         if(inWishList()){
             console.log("removing")
             dispatch(authActions.setremovewishlist())

@@ -21,6 +21,6 @@ urlpatterns = [
     path("checkout",views.CheckOutAV.as_view(),name="checkout"),
     path("wishlist/<int:pk>",views.WishListAV.as_view(),name="wishlist"),
     path("wishlistremove/<int:pk>",views.WishListRemoveAV.as_view(),name="wishlist-remove"),
-    path("review-create/<int:pk>",views.ReviewCreateAV.as_view(),name = "review-create")
-
+    path("review-create/<int:pk>",views.ReviewCreateAV.as_view(),name = "review-create"),
+    path("signup",views.SignUp.as_view(),name="sign-up")
 ]
