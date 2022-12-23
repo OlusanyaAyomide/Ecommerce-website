@@ -4,10 +4,11 @@ import CatHero from "../CartList/cartlist/CartHero"
 import Review from './profile/Review'
 import Purchased from './profile/purchased'
 import { useSelector,useDispatch } from 'react-redux'
-import {CreateReview,WishListRemove} from '../store/datafetch'
+import {CreateReview,RecentFetch,WishListRemove} from '../store/datafetch'
 import Wishlist from './profile/wishlist'
 import { detailaction } from '../store/detailslice'
-import { reviewactions } from '../store/reviewslice'
+import Recent from '../CartList/cartlist/Recent'
+
 
 export default function Profile() {
   const  {toggle,details,removedId} = useSelector((state=>state.review))
@@ -15,6 +16,7 @@ export default function Profile() {
   const [firrsrender,setfirstrender] = useState(true)
   const {id,comment,title,rating} = details
   const Token = useSelector((state=>state.auth.token.access))
+  const isloaded = useSelector((state=>state.cart.loaded))
   const dispatch = useDispatch()
   const purchasedList = useSelector((state=>state.auth.userinfo))
   console.log(purchasedList)
@@ -27,6 +29,9 @@ export default function Profile() {
     if  (firrsrender){return}
     dispatch(WishListRemove(removedId,Token))
   },[removedId])
+  useEffect(()=>{
+    dispatch(RecentFetch())
+  },[])
 
 
   useEffect(()=>{
@@ -37,12 +42,16 @@ export default function Profile() {
   },[toggle])
 
   return (
-    <div className='relative'>
+    <div>
+        {isloaded && <div className='relative'>
         <Header/>
         <CatHero/>
         <Wishlist/>
         <Purchased/>
+        <Recent/>
         {pagetoggle && <Review/>}
+    </div>}
     </div>
+
   )
 }

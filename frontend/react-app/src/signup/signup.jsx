@@ -11,14 +11,15 @@ export default function Signup() {
         username:"",
         password:"",
         email:"", 
+        password2:"",
     })
-    const [formControl,setformcontrol] = useState({email:false,password:false})
+    const [formControl,setformcontrol] = useState({email:false,password:false,password2:false})
     const dispatch = useDispatch()
     const handleSubmit=(event)=>{
-        setformcontrol({email:false,password:false})
+        setformcontrol({email:false,password:false,password2:false})
         event.preventDefault()
         let error  = false
-        const {username,email,password} = event.target
+        const {username,email,password,password2} = event.target
         console.log(event.target.username.value)
         if (!email.value.includes("@gmail.com")){
             error = true
@@ -28,11 +29,19 @@ export default function Signup() {
             error = true
             setformcontrol((prev)=>{return {...prev,["password"]:true}})
         }
-        dispatch(authActions.setsignupusername({
-            username:username.value,
-            password:password.value,
-            email:email.value,
-        })) 
+        console.log(password,password2)
+        if (password.value !== password2.value){
+            error = true
+            setformcontrol((prev)=>{return {...prev,["password2"]:true}})
+        }
+        if (!error){
+            dispatch(authActions.setsignupusername({
+                username:username.value,
+                password:password.value,
+                email:email.value,
+            })) 
+        }
+    
     }
     
   return (
@@ -77,7 +86,10 @@ export default function Signup() {
                 </div>
 
                 <div className="mb-2">
-                    {formControl.password && <span className='text-red-500 font-semibold text-md'>{"Password field is empty or To short"}</span>} 
+                    {formControl.password && <span className='text-red-500 block font-semibold text-md'>
+                        {"Password field is empty or To short"}</span>} 
+                    {formControl.password2 && <span className='text-red-500 block font-semibold text-md'>
+                        {"Password does not match"}</span>} 
                     <label
                         htmlFor="password"
                         className="block text-sm font-semibold text-gray-800"
@@ -92,12 +104,22 @@ export default function Signup() {
                         className="block w-full px-4 py-2 mt-2 text-[#5858ec]   bg-white border rounded-md focus:border-[#5858ec]/40 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
                     />
                 </div>
-                <a
-                    href="#"
-                    className="text-xs text-[#5858ec] hover:underline"
-                >
-                    Forgot Password?
-                </a>
+                <div className="mb-2">
+                    <label
+                        htmlFor="password"
+                        className="block text-sm font-semibold text-gray-800"
+                    >
+                        Confirm Password
+                    </label>
+                    <input
+                        id="password2"
+                        type="password"
+                        name="password2"
+                        autoComplete='current-username'
+                        className="block w-full px-4 py-2 mt-2 text-[#5858ec]   bg-white border rounded-md focus:border-[#5858ec]/40 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                    />
+                </div>
+
                 <div className="mt-6">
                     <button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-[#5858ec] rounded-md hover:bg-[#0e0e6b] focus:outline-none focus:bg-[#5858ec]">
                         Login

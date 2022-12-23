@@ -102,7 +102,7 @@ export default function Main() {
             <Route path='/login' element={
             loginsatus !== 200? <LoginControl/>:(<Navigate replace to="/"/>)}>
             </Route>
-            <Route path ='/profile'  element={<Profile/>}></Route>
+            {/* <Route path ='/profile'  element={<Profile/>}></Route> */}
             <Route path ='/profile'  element={user.id?<Profile/>:(<Navigate replace to="/"/>)}></Route>
             {/* <Route path='/test' element={<Test/>}></Route> */}
             <Route path='/signup' element={loginsatus !== 200 ? <Signupcontrol/>:(<Navigate replace to="/"/>)}></Route>

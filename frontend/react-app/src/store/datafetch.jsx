@@ -302,7 +302,9 @@ export function InitiaTokenFetch(token){
             const response =await FetchToken()
             if (status===200){
                 console.log(response)
-                dispatch(authActions.setTokens(response))}
+                dispatch(authActions.setTokens(response))
+                console.log(response)   
+            }
             else{
                 dispatch(authActions.resetuserinfo())
                 
@@ -334,7 +336,9 @@ export function LoginFetch(username,password){
             const response = await login()
             if(status === 200){
             dispatch(authActions.setstatus(200))
-            dispatch(authActions.setTokens(response))}
+            dispatch(authActions.setTokens(response))
+    
+        }
             else(
                 dispatch(authActions.seterror(response))
             )

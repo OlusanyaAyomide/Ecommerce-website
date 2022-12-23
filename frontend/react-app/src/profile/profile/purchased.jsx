@@ -70,7 +70,7 @@ export default function Purchased() {
         {showMessage && <SuccessDiv/>}
         <div className='flex w-full '>
           <div className="w-full relative">
-            <MinHeaderProfile label ="Purchased Products "/>
+            {purchasedField.length > 0 && <MinHeaderProfile label ="Purchased Products "/>}
           </div>
         </div>
         <div className=' py-2 '>

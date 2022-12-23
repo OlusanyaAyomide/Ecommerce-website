@@ -6,7 +6,9 @@ import { reviewactions } from '../../store/reviewslice'
 
 export default function Wishlist() {
   const {wishlist} = useSelector((state=>state.auth.userinfo))
+  console.log(wishlist)
   const dispatch = useDispatch()
+
   const products = wishlist.map((item,key)=>{
     return(
       <div className="my-2 flex bg-white rounded-lg -mx-2" key={key}>
