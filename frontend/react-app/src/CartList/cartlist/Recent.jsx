@@ -18,6 +18,11 @@ export default function Recent() {
           <div className="row -mx-4 px-4 bg-white rounded-md py-2">
             {RecentList}
           </div> 
+          {recent.length < 1 && <div>
+          <div className='flex justify-center bg-gradient-to-l my-2 from-[#5858ec]/20 to-slate-200/20 py-4'>
+            <span className="block text-[22px] font-semibold">No product has been viewed yet</span>
+          </div>
+        </div>}
         </section>
     )
 }
