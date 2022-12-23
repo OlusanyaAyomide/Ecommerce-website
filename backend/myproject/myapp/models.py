@@ -64,6 +64,7 @@ class UserProfile2(models.Model):
     purchasedField = models.ManyToManyField(Product,related_name="myproduct")
     admin = models.BooleanField(default=False,blank=True)
     wishlist = models.ManyToManyField(Product,related_name="wishlists")
+    email = models.EmailField(null=True,blank=True)
 
     def __str__(self):
         return f"{self.user.username} Second Profile"

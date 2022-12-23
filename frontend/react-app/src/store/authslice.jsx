@@ -14,6 +14,13 @@ export const authslice = createSlice({
       userinfo:{},
       addwishlistloading:false,
       removewishloading:false,
+      signupusername:"",
+      signuppassword:"",
+      signupemail:"",
+      randnumb:0,
+      signuperror:""
+
+
     },
     reducers:{ 
         setTokens(state,action){
@@ -62,7 +69,20 @@ export const authslice = createSlice({
             localStorage.removeItem("current")
             localStorage.removeItem("access")
             state.isloaded = true
+        },
+        setsignupusername(state,action){
+            console.log("setting....sett")
+            state.signupusername = action.payload.username
+            state.signuppassword = action.payload.password
+            state.signupemail = action.payload.email
+            state.randnumb = Math.floor(Math.random() * 100000)
+        },
+        setsignuperror(state,action){
+            console.log(action.payload)
+            state.signuperror = action.payload
+
         }
+
     },
 })
 export const authActions=authslice.actions

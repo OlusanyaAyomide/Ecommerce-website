@@ -258,8 +258,8 @@ export function RecentFetch(){
                 return dispatch(Cartaction.setrecent(response))
             }
         }
-        catch{}
-         // return dispatch(Cartaction.setrecent(LatestDemo))
+        catch(err){console.log(err)}
+      
     }
 }
 
@@ -280,7 +280,6 @@ export function SearchFetch(prop){
         }
         }
         catch(err){console.log(err)}
-        // return dispatch(searchaction.updatesearch(LatestDemo))
     }
 }
 
@@ -472,7 +471,7 @@ export function CreateReview(token,productid,comment,title,rating){
         }
         try{
             const response = await FethcApi()
-            console.log(response)
+            // console.log(response)
             console.log(status)
             if (status === 200){
                 dispatch(authActions.setuserinfo(response))
@@ -485,5 +484,37 @@ export function CreateReview(token,productid,comment,title,rating){
             console.log(err)
         }
 
+    }
+}
+
+export function googlesignupLogin(username,password,email,bool){
+    return async (dispatch)=>{
+        async function TryLogin(){
+            const res = await fetch(`${host}/signup`,{
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify({
+                    "username":username,
+                    "password":password,
+                    "google":bool,
+                    "email":email
+                })
+            })
+            const status = res.status
+            const data = await res.json()
+            if (status == 200 || status == 201){
+                dispatch(LoginFetch(data.username,password))
+            }   
+            else{
+                dispatch(authActions.setsignuperror(data))
+            }
+            console.log(data)
+        }
+        try{
+            const response = await TryLogin()
+        }
+        catch(err){console.log(err)}
     }
 }

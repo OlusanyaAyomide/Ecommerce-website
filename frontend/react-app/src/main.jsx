@@ -8,18 +8,14 @@ import { store } from './store/store'
 import Category from "./category/index"
 import Detail from './detail/Detail'
 import { useSelector,useDispatch } from 'react-redux'
-import {AutoPredictFetch,CategoryFetch,InitiaTokenFetch,Userinfo} from "./store/datafetch"
+import {AutoPredictFetch,CategoryFetch,InitiaTokenFetch,Userinfo,googlesignupLogin} from "./store/datafetch"
 import CartMain from './CartList/CartMain'
 import Search from './search/Search'
-import Login from './login/Login'
+import LoginControl from './login/loginControl'
 import  {authActions} from "./store/authslice"
-import Gapi from './Gapi'
 import Profile from "./profile/profile"
-
-
-let first = true
-let firstrender = true
-
+import Test from './Test'
+import Signupcontrol from './signup/signupcontrol'
 
 
 export default function Main() {
@@ -38,6 +34,7 @@ export default function Main() {
     window.localStorage.setItem("anonymous",r)
   }
 
+
   useEffect(()=>{
     if (first){
       first = false
@@ -50,6 +47,11 @@ export default function Main() {
     dispatch(CategoryFetch())
 
   },[])
+
+  let first = true
+  let firstrender = true
+  // const [signup,setsignup] = useState(true)
+
   useEffect(()=>{
     if (firstrender){
       firstrender=false
@@ -71,6 +73,8 @@ export default function Main() {
       }
   }
   },[])
+
+
 
   useEffect(()=>{
     if (accessToken !== null){
@@ -96,12 +100,14 @@ export default function Main() {
               searchparam?<Search/>:(<Navigate replace to="/"/>)}>
             </Route>
             <Route path='/login' element={
-            loginsatus !== 200? <Login/>:(<Navigate replace to="/"/>)}>
+            loginsatus !== 200? <LoginControl/>:(<Navigate replace to="/"/>)}>
             </Route>
-            {/* <Route path ='/profile'  element={<Profile/>}></Route> */}
+            <Route path ='/profile'  element={<Profile/>}></Route>
             <Route path ='/profile'  element={user.id?<Profile/>:(<Navigate replace to="/"/>)}></Route>
-            <Route path ="/google" element={<Gapi/>}></Route>
+            {/* <Route path='/test' element={<Test/>}></Route> */}
+            <Route path='/signup' element={loginsatus !== 200 ? <Signupcontrol/>:(<Navigate replace to="/"/>)}></Route>
           </Routes>
+         
     </BrowserRouter>
  
   }</>

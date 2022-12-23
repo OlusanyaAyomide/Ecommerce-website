@@ -12,6 +12,7 @@ import { useEffect } from 'react'
 
 export default function Checkout() {
     const products = useSelector((state=>state.cart))
+    const {userinfo,loginstatus} = useSelector((state=>state.auth))
     const dispatch =useDispatch()
     const [popout,setpopout] = useState(false)
     const [remove,setremove] = useState(false)
@@ -19,15 +20,18 @@ export default function Checkout() {
     const [checkedout,setcheckedout] = useState(false)
     const navigate = useNavigate()
     const [successstatus,setsuccessstatus] = useState(false)
-
+    console.log(userinfo)
 
     function handlepayment(){
+      if(loginstatus == 0){
+        navigate("/login")
+      }
       const paystack = new PaystackPop()
       const amount = products.price + (products.quantity * 240) + (products.price * 0.05 )
       paystack.newTransaction({
       key : "pk_test_9c574c9c2d08170afdaf43de5e76fcec6f514a5b",
       amount: amount * 100,
-      email:"ayomideflex73@gmail.com",
+      email:userinfo.email,
       firstname:"Olusanya",
       lastname:"Ayomide",
       onSuccess(transaction){

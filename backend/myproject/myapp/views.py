@@ -12,6 +12,7 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated
 import random
 from rest_framework.exceptions import ValidationError
+from django.contrib.auth.hashers import check_password
 
 # Create your views here.
 
@@ -95,10 +96,10 @@ class RecentlyViewed(generics.ListAPIView):
     serializer_class = Productserializer
     def get_queryset(self):
         key = self.kwargs["key"]
-        try:
-            Anuser = AnonymousUser.objects.get(key=key)
-        except:
-            Anuser = AnonymousUser.objects.get(id=1)
+        checker = AnonymousUser.objects.filter(key = key).exists()
+        if not checker:
+            AnonymousUser.objects.create(key = key)
+        Anuser = AnonymousUser.objects.get(key=key)
         products = Anuser.viewed.all()
         if products.count() < 12:
             print(products.count())
@@ -230,17 +231,40 @@ class ReviewCreateAV(APIView):
 
 class SignUp(APIView):
     def post(self,request):
-        print(request.body)
         username = request.data["username"]
         password = request.data["password"]
-        print(username,password)
-        print(len(password))
+        fromgoogle= request.data["google"]
+        email = request.data["email"]
         errorlist = []
+   
+        if fromgoogle and User.objects.filter(username = username).exists():
+            signedInUser = User.objects.get(username = username)
+            if check_password(password,signedInUser.password):
+                print(True)
+                pass
+            else:
+                print("Changing...")
+                username = f"{username}{password[len(password)-3:]}"
+
         if User.objects.filter(username = username).exists():
-            errorlist.append("Username already exists")
+            user = User.objects.get(username = username)
+            currentpassword = user.password
+            print(user.password)
+            checker = check_password(password,currentpassword)
+            print(checker)
+            if checker :
+                return Response({"username":username},status=200)
+            if not fromgoogle:
+                errorlist.append("Username already exists")
+
         if len(password)<7:
             print(len(password))
             errorlist.append("Password is To short")
         if len(errorlist) != 0:
             return Response(errorlist,status=400)
-        return Response({"detail":"succesful"})
+        newuser = User.objects.create(username=username,email=email)
+        newuser.set_password(password)
+        newuser.save()
+        profile2 = UserProfile2.objects.create(user=newuser,email = email)
+        profile2.save()
+        return Response({"username":username},status=201)
