@@ -14,7 +14,7 @@ export default function Trending() {
     <section className="container ">
         <div className='-mx-4 md:-mx-6 pt-2'>
             <div className='bg-slate-200'>
-             <CatHeaeder2 name ="Trending Products" />
+             {trending.length > 1 && <CatHeaeder2 name ="Trending Products" />}
             </div>
         </div>
         <div className="row -mx-4 px-4 bg-white rounded-md py-2">

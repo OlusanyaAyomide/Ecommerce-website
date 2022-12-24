@@ -5,6 +5,7 @@ import { useSelector,useDispatch } from 'react-redux'
 import { SearchFetch } from '../store/datafetch'
 import { useEffect } from 'react'
 import Result from './search/Result'
+import Test from '../Test'
 
 export default function Search() {
   const dispatch = useDispatch()
@@ -16,11 +17,12 @@ export default function Search() {
     dispatch(SearchFetch(userInput))
   },[userInput])
   return (
-    <> {loaded && 
+    <div> {loaded && 
     <div>
       <div><Header/></div>
       <div><CartHero/></div>
       <div><Result/></div>
-    </div>}</>
+    </div>}
+    {!loaded && <Test/>}</div>
   )
 }

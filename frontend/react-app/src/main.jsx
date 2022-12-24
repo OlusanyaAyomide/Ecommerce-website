@@ -29,17 +29,21 @@ export default function Main() {
   const accessToken = useSelector((state=>state.auth.token.access))
   const user = useSelector((state=>state.auth.userinfo))
   const anonymous = window.localStorage.getItem("anonymous")
+  let first = true
+  let firstrender = true
   if (anonymous === null){
     let r = (Math.random() + 1).toString(36).substring(7)
     window.localStorage.setItem("anonymous",r)
   }
 
-
+  console.log(UserInput)
   useEffect(()=>{
-    if (first){
+    console.log(UserInput,"hereeee11")
+    if (UserInput == ""){
       first = false
       return
     }
+    console.log(UserInput,"hereeeee")
     dispatch(AutoPredictFetch(UserInput))
   },[UserInput])
 
@@ -48,8 +52,7 @@ export default function Main() {
 
   },[])
 
-  let first = true
-  let firstrender = true
+  
   // const [signup,setsignup] = useState(true)
 
   useEffect(()=>{
@@ -85,7 +88,8 @@ export default function Main() {
     }
   },[accessToken])
   return (
-    <>{isloaded &&
+    <div>
+      {isloaded && <div>
     <BrowserRouter>
          <Routes>
             <Route path='/' element={<Home/>}></Route>
@@ -102,15 +106,14 @@ export default function Main() {
             <Route path='/login' element={
             loginsatus !== 200? <LoginControl/>:(<Navigate replace to="/"/>)}>
             </Route>
-            {/* <Route path ='/profile'  element={<Profile/>}></Route> */}
             <Route path ='/profile'  element={user.id?<Profile/>:(<Navigate replace to="/"/>)}></Route>
-            {/* <Route path='/test' element={<Test/>}></Route> */}
+            <Route path='/test' element={<Test/>}></Route>
             <Route path='/signup' element={loginsatus !== 200 ? <Signupcontrol/>:(<Navigate replace to="/"/>)}></Route>
-          </Routes>
-         
+       </Routes>   
     </BrowserRouter>
- 
-  }</>
+  </div>}
+  {!isloaded && <div><Test/></div>}
+  </div>
   )
 }
 

@@ -30,7 +30,7 @@ export default function Header(){
   const navigate=useNavigate()
   const [params,setparams] =useState("")
   const user = useSelector((state=>state.auth.userinfo))
-  console.log(useSelector((state=>state.auth.loginstatus)))
+
 
   function setCategoryID(id){
     dispatch(categoryactions.setCategoryID(id))

@@ -9,6 +9,7 @@ const categoryslice = createSlice({
         allstores:[],
         active:false,
         currentid:0,
+        isloaded:false
     },
     reducers:{
         updatename(state,action){
@@ -29,6 +30,7 @@ const categoryslice = createSlice({
         },
         updateallstores(state,action){
             state.allstores = action.payload
+            state.isloaded = true
         },
         setasactive(state){
             state.active = true

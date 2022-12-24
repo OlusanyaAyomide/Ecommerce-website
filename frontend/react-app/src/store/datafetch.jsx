@@ -10,7 +10,8 @@ import { reviewactions } from './reviewslice'
 
 
 
-const host = "http://127.0.0.1:8000"
+// const host = "http://127.0.0.1:8000"
+const host = "https://ecommerce.pythonanywhere.com/"
 
 export function Latestfetch() {
     let status = 0
@@ -316,7 +317,7 @@ export function InitiaTokenFetch(token){
 }
 export function LoginFetch(username,password){
     let status=0
-    console.log(username,password)
+    // console.log(username,password)
     return async(dispatch)=>{
         async function login(){
             const res = await fetch(`${host}/auth/api/token`,{

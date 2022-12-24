@@ -8,6 +8,7 @@ import {CreateReview,RecentFetch,WishListRemove} from '../store/datafetch'
 import Wishlist from './profile/wishlist'
 import { detailaction } from '../store/detailslice'
 import Recent from '../CartList/cartlist/Recent'
+import Test from '../Test'
 
 
 export default function Profile() {
@@ -51,6 +52,7 @@ export default function Profile() {
         <Recent/>
         {pagetoggle && <Review/>}
     </div>}
+    {!isloaded && <Test/>}
     </div>
 
   )

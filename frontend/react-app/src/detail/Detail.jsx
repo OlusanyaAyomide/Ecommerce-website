@@ -9,6 +9,7 @@ import { DetailFetch,SimilarFetch,WishListAdd,WishListRemove} from '../store/dat
 import Similar from './detail/Similar'
 import Review from "./detail/Review"
 import { detailaction } from '../store/detailslice'
+import Test from '../Test'
 
 export default function Detail() {
     const location=useLocation()
@@ -45,7 +46,7 @@ export default function Detail() {
     },[removewishloading])
     
   return (
-    <>
+    <div>
    {loaded && render && <div>
         <div><Header/></div>
        <div><Hero/></div>
@@ -53,6 +54,7 @@ export default function Detail() {
        <div><Review/></div>
        <div><Similar/></div>
     </div>}
-    </>
+    {!loaded && <div><Test/></div>}
+    </div>
   )
 }

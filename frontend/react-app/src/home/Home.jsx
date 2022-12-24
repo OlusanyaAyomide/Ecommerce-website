@@ -7,6 +7,7 @@ import { Latestfetch,AffiliateFetch,AutoPredictFetch,FeaturedFetch,CategoryFetch
 import { useSelector,useDispatch } from 'react-redux'
 import { detailaction } from '../store/detailslice'
 import {categoryactions} from "../store/categoryslice"
+import Test from '../Test'
 
 
 let first = true
@@ -46,14 +47,15 @@ export function Home() {
 
   },[])
     return(
-      <>
+      <div>
       {loaded &&  <div className='bg-[#d1c9b2] '>
         <div className="bg-slate-100"><Header/></div>
         <div><Caetegory/></div>
         <div><Latests/></div>
         <div><Affiliate/></div>
       </div>}
-      </>
+      {!loaded && <><Test/></>}
+      </div>
     
     )
 }

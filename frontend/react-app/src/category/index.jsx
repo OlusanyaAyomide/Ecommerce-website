@@ -6,28 +6,21 @@ import { useDispatch,useSelector } from 'react-redux'
 import Trending from './category/Trending'
 import { TrendingFetch,AllcategoryStoreFetch,categoryDetailFetch,CategoryHeaderFetch } from '../store/datafetch'
 import Allcategory from './category/Allcategory'
+import Test from "../Test"
 export default function Category() {
     const dispatch = useDispatch()
-    // const allcategories = useSelector((s))
-    // const location = useLocation()
-    // const {from} = location.state
-    // const {all} = location.state
-    
-    // useEffect(()=>{
-    //     dispatch(categoryactions.updatename(from))  
-    // },[])
-    // useEffect(()=>{
-    //     dispatch(categoryactions.changecategory(all))
-    // },[])
     const currentId = useSelector((state=>state.category.currentid))
-    useEffect(()=>{
-      dispatch(categoryDetailFetch(currentId))
-    },[currentId])
-    useEffect(()=>{
-      dispatch(TrendingFetch(currentId))
-    })
+    const {isloaded} = useSelector((state=>state.category))
+    // useEffect(()=>{
+    
+    // },[currentId])
+    // useEffect(()=>{
+
+    // },[])
 
     useEffect(()=>{
+      dispatch(categoryDetailFetch(currentId))
+      dispatch(TrendingFetch(currentId))
       dispatch(CategoryHeaderFetch(currentId))
     },[currentId])
 
@@ -35,10 +28,14 @@ export default function Category() {
       dispatch(AllcategoryStoreFetch())
     },[])
   return (
-    <div className='bg-[#d1c9b2] '>
+    <div>
+      {isloaded && <div className='bg-[#d1c9b2] '>
         <div className='bg-slate-100'><Header/></div>
         <div><Trending/></div>
         <div><Allcategory/></div>
+    </div>}
+    {!isloaded && <Test/>}
     </div>
+ 
   )
 }

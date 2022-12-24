@@ -131,7 +131,7 @@ return(
         </div> 
         <div className='md:w-3/12 hidden md:flex relative items-center justify-between px-1'>
           <span><User name="Ayomide" items={["profile","Orders","saved Items"]} type="user"/></span>
-          <span><User name="Admin" items ={["Products","View"]} type="admin"/></span>
+          <span className='hidden'><User name="Admin" items ={["Products","View"]} type="admin"/></span>
           <span><Cart name={0}/></span>  
         </div>
     
@@ -160,7 +160,7 @@ return(
           <div className='w-10/12 h-full bg-[#FAF9F6] py-4  px-4 md:px-6'>
             <h1 className='style-heading'>My Magneto Account</h1>
             <span className='block mb-3'><User name="Ayomide" items={["profile","Orders","Saved Items"]} type="user" status="nav"/></span>
-            <span className='block mb-3'><User name="Admin" items ={["Products","View"]} type="admin" status="nav"/></span>
+            <span className='mb-3 hidden'><User name="Admin" items ={["Products","View"]} type="admin" status="nav"/></span>
             <h1 className='style-heading'>Categories</h1>
             <ul>
             <Link to={"/"}>
