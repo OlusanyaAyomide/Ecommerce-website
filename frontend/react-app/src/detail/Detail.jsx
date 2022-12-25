@@ -10,6 +10,7 @@ import Similar from './detail/Similar'
 import Review from "./detail/Review"
 import { detailaction } from '../store/detailslice'
 import Test from '../Test'
+import Footer from '../Footer'
 
 export default function Detail() {
     const location=useLocation()
@@ -53,6 +54,7 @@ export default function Detail() {
        <div><Feedback/></div>
        <div><Review/></div>
        <div><Similar/></div>
+       <div><Footer/></div>
     </div>}
     {!loaded && <div><Test/></div>}
     </div>

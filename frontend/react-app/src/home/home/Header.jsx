@@ -18,7 +18,7 @@ export default function Header(){
   const[toggle,setToggle] = useState(false)
   const[drop,setdrop] = useState(false)
   const [admin,setadmin] = useState(false)
-
+  console.log(useSelector((state=>state.auth.userinfo)))
   const [isearching,setisSearching] = useState()
   const [count,setcount] = useState(0)
   const [scrolref,scrolling] = useInView()
@@ -30,12 +30,13 @@ export default function Header(){
   const navigate=useNavigate()
   const [params,setparams] =useState("")
   const user = useSelector((state=>state.auth.userinfo))
+  console.log(useSelector(state=>state.auth.loginstatus))
 
 
   function setCategoryID(id){
     dispatch(categoryactions.setCategoryID(id))
-    console.log(id)
-    navigate("/category")
+    // console.log(id)
+    // navigate("/category")
   }
   const CategoryItems = CategoryList.map((items,key)=>{
     return(
@@ -101,7 +102,7 @@ export default function Header(){
     else if(param === "profile"){
       navigate("/profile")
     }
-    else if(param === "logout"){
+    else if(param === "logout" || "Logout"){
       dispatch(authActions.resetuserinfo())
       dispatch(authActions.zerostatus())
       navigate("/")

@@ -8,6 +8,7 @@ import { useSelector,useDispatch } from 'react-redux'
 import { detailaction } from '../store/detailslice'
 import {categoryactions} from "../store/categoryslice"
 import Test from '../Test'
+import Footer from '../Footer'
 
 
 let first = true
@@ -53,6 +54,7 @@ export function Home() {
         <div><Caetegory/></div>
         <div><Latests/></div>
         <div><Affiliate/></div>
+        <div><Footer/></div>
       </div>}
       {!loaded && <><Test/></>}
       </div>

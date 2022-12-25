@@ -3,6 +3,7 @@ import Signup from './signup'
 import { useSelector,useDispatch } from 'react-redux'
 import { authActions } from '../store/authslice'
 import { googlesignupLogin } from '../store/datafetch'
+import Footer from '../Footer'
 
 
 export default function Signupcontrol() {
@@ -26,6 +27,7 @@ export default function Signupcontrol() {
   return (
     <div>
       {isreset && <div><Signup/></div>}
+      <div><Footer/></div>
     </div>
 
   )

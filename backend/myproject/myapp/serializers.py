@@ -58,6 +58,11 @@ class UserSerializer(serializers.ModelSerializer):
     purchasedField  = Productserializer(many=True,read_only=True)
     wishlist = Productserializer(many=True,read_only=True)
     user = serializers.StringRelatedField()
+    newemail = serializers.SerializerMethodField()
     class Meta:
         model = UserProfile2
         fields="__all__"
+
+    def get_newemail(self,object):
+        user = User.objects.get(username = object.user)
+        return user.email

@@ -2,11 +2,12 @@ import React from 'react'
 import {useState,useEffect} from "react"
 import { useDispatch,useSelector } from 'react-redux'
 import { authActions } from '../store/authslice'
+import { useNavigate } from 'react-router-dom'
 
 
 export default function Signup() {
     const {signuperror} = useSelector((state=>state.auth))
-    console.log(signuperror)
+    const navigate =useNavigate()
     const [formInput,setformInput] = useState({
         username:"",
         password:"",
@@ -29,11 +30,11 @@ export default function Signup() {
             error = true
             setformcontrol((prev)=>{return {...prev,["password"]:true}})
         }
-        console.log(password,password2)
         if (password.value !== password2.value){
             error = true
             setformcontrol((prev)=>{return {...prev,["password2"]:true}})
         }
+        console.log("last ",error)
         if (!error){
             dispatch(authActions.setsignupusername({
                 username:username.value,
@@ -126,6 +127,7 @@ export default function Signup() {
                     </button>
                 </div>
             </form>
+            <button onClick={()=>{navigate("/login")}} className="font-medium text-[#5858ec] text-sm hover:underline">Back To login</button>
         </div>
     </div>
  </div>

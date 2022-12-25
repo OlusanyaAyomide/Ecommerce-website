@@ -267,3 +267,26 @@ class SignUp(APIView):
         profile2 = UserProfile2.objects.create(user=newuser,email = email)
         profile2.save()
         return Response({"username":username},status=201)
+
+class UserSignUp(APIView):
+    def post(self,request):
+        username = request.data["username"]
+        password = request.data["password"]
+        email = request.data["email"]
+        errorlist = []
+
+        if User.objects.filter(username=username).exists():
+            errorlist.append("Username already exists")
+        if len(password) < 7:
+            errorlist.append("password is to short")
+        if len(errorlist) != 0:
+            return Response(errorlist,status=400)
+        user = User.objects.create(username=username,email = email)
+        user.set_password(password)
+        user.save()
+        profile2 = UserProfile2.objects.create(user=user,email = email)
+        profile2.save()
+        return Response({username:username},status=201)
+        
+
+   

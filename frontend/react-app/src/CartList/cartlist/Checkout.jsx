@@ -13,6 +13,7 @@ import { useEffect } from 'react'
 export default function Checkout() {
     const products = useSelector((state=>state.cart))
     const {userinfo,loginstatus} = useSelector((state=>state.auth))
+    console.log("new ",userinfo)
     const dispatch =useDispatch()
     const [popout,setpopout] = useState(false)
     const [remove,setremove] = useState(false)
@@ -31,7 +32,7 @@ export default function Checkout() {
       paystack.newTransaction({
       key : "pk_test_9c574c9c2d08170afdaf43de5e76fcec6f514a5b",
       amount: amount * 100,
-      email:userinfo.email,
+      email:userinfo.newemail,
       firstname:"Olusanya",
       lastname:"Ayomide",
       onSuccess(transaction){

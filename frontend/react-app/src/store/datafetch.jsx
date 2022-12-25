@@ -1,5 +1,5 @@
 import React from 'react'
-import { LatestDemo,AffiliateDemo,Searchresults,categories,SlideImage,TopListtDemo,ProductDetailDemo,SimilarProduct,ProductDetailDemo2,ProductDetailDemo3  } from '../constants'
+import { LatestDemo} from '../constants'
 import { categoryactions } from './categoryslice'
 import { Productactions } from './productslice'
 import { detailaction } from './detailslice'
@@ -493,9 +493,10 @@ export function CreateReview(token,productid,comment,title,rating){
 }
 
 export function googlesignupLogin(username,password,email,bool){
+    console.log(username, "is heree")
     return async (dispatch)=>{
         async function TryLogin(){
-            const res = await fetch(`${host}/signup`,{
+            const res = await fetch(`${host}/usersignup`,{
                 method:"POST",
                 headers:{
                     "Content-Type":"application/json"
@@ -503,19 +504,21 @@ export function googlesignupLogin(username,password,email,bool){
                 body:JSON.stringify({
                     "username":username,
                     "password":password,
-                    "google":bool,
                     "email":email
                 })
             })
             const status = res.status
             const data = await res.json()
+            console.log(data)
             if (status == 200 || status == 201){
-                dispatch(LoginFetch(data.username,password))
+                console.log(data.username)
+                dispatch(LoginFetch(username,password))
             }   
             else{
                 dispatch(authActions.setsignuperror(data))
             }
             console.log(data)
+            console.log(status)
         }
         try{
             const response = await TryLogin()

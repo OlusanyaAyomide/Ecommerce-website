@@ -66,7 +66,7 @@ export default function Header(){
     else if(param === "profile"){
       navigate("/profile")
     }
-    else if(param === "Logout"){
+    else if(param === "Logout" || "logout"){
       dispatch(authActions.resetuserinfo())
       dispatch(authActions.zerostatus())
       navigate("/")

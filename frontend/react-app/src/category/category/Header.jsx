@@ -90,7 +90,7 @@ export default function Header(){
   }
   function headerouter(param){
     console.log(param)
-    if(param === "login"){
+    if(param === "login" || "Login"){
       console.log("navigating...")
 
       navigate("/login")
@@ -98,7 +98,7 @@ export default function Header(){
     else if(param === "profile"){
       navigate("/profile")
     }
-    else if(param === "logout"){
+    else if(param === "logout" || "Logout"){
       dispatch(authActions.resetuserinfo())
       dispatch(authActions.zerostatus())
       navigate("/")

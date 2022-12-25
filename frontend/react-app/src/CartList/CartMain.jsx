@@ -6,6 +6,7 @@ import { useSelector,useDispatch } from 'react-redux'
 import { RecentFetch,CheckoutCart } from '../store/datafetch'
 import Recent from './cartlist/Recent'
 import Test from '../Test'
+import Footer from '../Footer'
 
 export default function CartMain(){
   const isloaded = useSelector((state=>state.cart.loaded))
@@ -32,6 +33,7 @@ export default function CartMain(){
     <div><CatHero/></div>
     <div><Checkout/></div>
     <div><Recent/></div>
+    <div><Footer/></div>
   </div>}
   {!isloaded && <Test/>}
   </div>

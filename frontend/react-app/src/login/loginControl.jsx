@@ -2,6 +2,7 @@ import React,{useEffect,useState} from 'react'
 import Login from './Login'
 import { authActions } from '../store/authslice'
 import { useSelector,useDispatch } from 'react-redux'
+import Footer from '../Footer'
 // import { googlesignupLogin } from '../store/datafetch'
 
 export default function LoginControl() {
@@ -21,6 +22,7 @@ export default function LoginControl() {
     <div>
       { isreset && <div>
         <Login/>
+        <Footer/>
     </div>}
     </div>
 

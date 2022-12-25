@@ -6,6 +6,7 @@ import { SearchFetch } from '../store/datafetch'
 import { useEffect } from 'react'
 import Result from './search/Result'
 import Test from '../Test'
+import Footer from '../Footer'
 
 export default function Search() {
   const dispatch = useDispatch()
@@ -22,6 +23,7 @@ export default function Search() {
       <div><Header/></div>
       <div><CartHero/></div>
       <div><Result/></div>
+      <div><Footer/></div>
     </div>}
     {!loaded && <Test/>}</div>
   )
