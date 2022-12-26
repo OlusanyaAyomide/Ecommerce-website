@@ -15,7 +15,6 @@ export default function Footer() {
   const FooterCategory = categoryList.map((items,key)=>{
       return(
         <button key ={key} className="py-1 block text-left" onClick={()=>{
-          console.log(items.id)
           dispatch(categoryactions.setCategoryID(items.id))
           navigate("/category")
         }}>{items.name}</button>

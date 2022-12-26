@@ -38,7 +38,6 @@ export default function Main() {
 
   console.log(UserInput)
   useEffect(()=>{
-    console.log(UserInput,"hereeee11")
     if (UserInput == ""){
       first = false
       return
